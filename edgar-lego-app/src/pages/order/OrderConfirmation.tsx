@@ -69,10 +69,6 @@ function OrderConfirmation() {
               <p className="text-lg font-medium">{userData.company}</p>
             </div>
             <div>
-              <h3 className="text-sm font-medium text-gray-500 mb-1">Industry</h3>
-              <p className="text-lg font-medium capitalize">{userData.industry}</p>
-            </div>
-            <div>
               <h3 className="text-sm font-medium text-gray-500 mb-1">Position</h3>
               <p className="text-lg font-medium capitalize">{userData.position}</p>
             </div>

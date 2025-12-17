@@ -1,1 +1,0 @@
-# edgar-lego-app

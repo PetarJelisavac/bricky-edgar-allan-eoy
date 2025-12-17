@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import logoLego from '../../assets/images/Logo.Lego.svg';
+import edgarLego from '../../assets/images/EdgarLego.svg';
 
 function WelcomeScreen() {
   const navigate = useNavigate();
@@ -137,100 +138,15 @@ function WelcomeScreen() {
           }}
           className="welcome-illustration"
         >
-          {/* Using EdgarLego as placeholder - in production, would use complex brick structure from Figma */}
-          <div style={{
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            position: 'relative'
-          }}>
-            {/* Simplified LEGO representation */}
-            <svg
-              viewBox="0 0 400 450"
-              style={{
-                width: '100%',
-                height: '100%',
-                maxWidth: '400px',
-                maxHeight: '450px'
-              }}
-            >
-              {/* Blue LEGO brick structure - simplified isometric view */}
-              <g transform="translate(200, 200)">
-                {/* Main vertical brick */}
-                <path
-                  d="M 0,-100 L 60,-70 L 60,100 L 0,130 L -60,100 L -60,-70 Z"
-                  fill="#1f71ff"
-                  stroke="#000"
-                  strokeWidth="2"
-                />
-                {/* Top face */}
-                <path
-                  d="M 0,-100 L 60,-70 L 0,-40 L -60,-70 Z"
-                  fill="#4d94ff"
-                  stroke="#000"
-                  strokeWidth="2"
-                />
-                {/* Side face */}
-                <path
-                  d="M -60,-70 L -60,100 L 0,130 L 0,-40 Z"
-                  fill="#0d5fd9"
-                  stroke="#000"
-                  strokeWidth="2"
-                />
-
-                {/* White window detail */}
-                <rect
-                  x="-30"
-                  y="20"
-                  width="25"
-                  height="50"
-                  fill="#ffffff"
-                  stroke="#000"
-                  strokeWidth="1.5"
-                />
-                <rect
-                  x="-30"
-                  y="20"
-                  width="25"
-                  height="15"
-                  fill="#e0e0e0"
-                  stroke="#000"
-                  strokeWidth="1"
-                />
-                <rect
-                  x="-30"
-                  y="37"
-                  width="25"
-                  height="15"
-                  fill="#e0e0e0"
-                  stroke="#000"
-                  strokeWidth="1"
-                />
-
-                {/* LEGO studs on top */}
-                <ellipse
-                  cx="-20"
-                  cy="-60"
-                  rx="8"
-                  ry="4"
-                  fill="#4d94ff"
-                  stroke="#000"
-                  strokeWidth="1"
-                />
-                <ellipse
-                  cx="20"
-                  cy="-50"
-                  rx="8"
-                  ry="4"
-                  fill="#4d94ff"
-                  stroke="#000"
-                  strokeWidth="1"
-                />
-              </g>
-            </svg>
-          </div>
+          <img
+            src={edgarLego}
+            alt="Edgar LEGO Character"
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'contain'
+            }}
+          />
         </div>
       </div>
 

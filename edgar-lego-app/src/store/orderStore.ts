@@ -25,7 +25,7 @@ export const useOrderStore = create<OrderStore>()(
 
       nextStep: () =>
         set((state) => ({
-          currentStep: Math.min(state.currentStep + 1, 4),
+          currentStep: Math.min(state.currentStep + 1, 5),
         })),
 
       prevStep: () =>
