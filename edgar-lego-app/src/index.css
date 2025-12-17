@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@400;600&family=Petrona:ital,wght@1,500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-lego-red: #e3000b;
+  --color-lego-blue: #1f71ff;
+  --color-lego-blue-light: #169aff;
+  --color-lego-blue-dark: #005fbe;
+  --color-lego-yellow: #FFD700;
+
+  --font-family-epilogue: 'Epilogue', sans-serif;
+  --font-family-petrona: 'Petrona', serif;
+  --font-family-lego: 'Arial Black', 'Impact', sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: 'Epilogue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom animations for LEGO bricks */
+@keyframes brick-fall {
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes brick-slide {
+  0% {
+    transform: translateX(-100vw);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.brick-fall {
+  animation: brick-fall 1s ease-out forwards;
+}
+
+.brick-slide {
+  animation: brick-slide 0.8s ease-out forwards;
+}

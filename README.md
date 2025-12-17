@@ -1,2 +1,1 @@
-# edgar-allan-lego-eoy
-EA EOY
+# edgar-lego-app
