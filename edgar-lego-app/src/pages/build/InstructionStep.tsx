@@ -3,7 +3,6 @@ import { useBuildStore } from '../../store/buildStore';
 import { buildSteps } from '../../data/buildSteps';
 import { instructionConfigs } from '../../data/instructionConfigs';
 
-// Import instruction assets
 import instructionBg from '../../assets/images/instruction-bg.png';
 import instructionOverlay1 from '../../assets/images/instruction-overlay-1.svg';
 import instructionOverlay2 from '../../assets/images/instruction-overlay-2.svg';
@@ -11,7 +10,6 @@ import instructionPlaceholder from '../../assets/images/instruction-placeholder.
 import audioIcon from '../../assets/images/audio-icon.svg';
 import arrowBack from '../../assets/images/arrow-back.svg';
 
-// Import LEGO brick components
 import brickSingle from '../../assets/images/brick-baddy-blue.svg';
 import Brick4x1 from '../../components/bricks/Brick4x1';
 import Brick4x2 from '../../components/bricks/Brick4x2';
@@ -23,26 +21,20 @@ function InstructionStep() {
 
   const currentStepIndex = parseInt(stepId || '0');
   const step = buildSteps[currentStepIndex];
-
-  // Get configuration for this step, or use default (step 2) if not configured
   const config = instructionConfigs[currentStepIndex] || instructionConfigs[2];
 
   if (!step || step.type !== 'build') {
-    return <div>Step not found</div>;
+    return <div className="min-h-screen flex items-center justify-center">Step not found</div>;
   }
 
   const handleNext = () => {
     markStepCompleted(step.id);
     const nextIndex = currentStepIndex + 1;
-
     if (nextIndex >= buildSteps.length) {
-      // TODO: Navigate to completion page when ready
       navigate('/build');
     } else {
       const nextStep = buildSteps[nextIndex];
       if (nextStep.type === 'build') {
-        // Check if it's the first build step or color selection
-        // Step 1 is color selection, others are instruction steps
         if (nextIndex === 1) {
           navigate(`/build/step/${nextIndex}`);
         } else {
@@ -69,430 +61,129 @@ function InstructionStep() {
   };
 
   const handleAudioToggle = () => {
-    // TODO: Implement audio playback
     console.log('Audio toggle clicked');
   };
 
-  // Render brick based on type
-  const renderBrick = (brickConfig: typeof config.bricks[0], index: number) => {
-    const animationName = `fallBrick${index + 1}`;
-
-    const containerStyle: React.CSSProperties = {
-      position: 'absolute',
-      left: brickConfig.left,
-      top: brickConfig.finalTop,
-      width: brickConfig.width,
-      height: brickConfig.height,
-      animation: `${animationName} 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards`,
-      animationDelay: brickConfig.animationDelay,
-      opacity: 0,
-      transform: 'translateY(-300px)',
-      zIndex: brickConfig.zIndex,
-    };
-
-    if (brickConfig.type === '4x1') {
-      return (
-        <div key={brickConfig.id} style={containerStyle} className={`brick-fall-${index + 1}`}>
-          <Brick4x1 />
-        </div>
-      );
-    } else if (brickConfig.type === '4x2') {
-      return (
-        <div key={brickConfig.id} style={containerStyle} className={`brick-fall-${index + 1}`}>
-          <Brick4x2 />
-        </div>
-      );
-    } else {
-      // Single brick
-      return (
-        <div key={brickConfig.id} style={containerStyle} className={`brick-fall-${index + 1}`}>
-          <img
-            src={brickSingle}
-            alt="LEGO brick"
-            style={{
-              display: 'block',
-              width: '100%',
-              height: '100%',
-              maxWidth: 'none'
-            }}
-          />
-        </div>
-      );
-    }
-  };
-
-  // Generate keyframes for all bricks
   const generateKeyframes = () => {
     return config.bricks.map((_, index) => `
       @keyframes fallBrick${index + 1} {
-        0% {
-          opacity: 0;
-          transform: translateY(-300px) scale(0.8);
-        }
-        60% {
-          opacity: 1;
-        }
-        80% {
-          transform: translateY(5px) scale(1.02);
-        }
-        100% {
-          opacity: 1;
-          transform: translateY(0) scale(1);
-        }
+        0% { opacity: 0; transform: translateY(-300px) scale(0.8); }
+        60% { opacity: 1; }
+        80% { transform: translateY(5px) scale(1.02); }
+        100% { opacity: 1; transform: translateY(0) scale(1); }
       }
     `).join('\n');
   };
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      backgroundColor: '#fefff8',
-      position: 'relative',
-      overflow: 'hidden'
-    }}>
-      {/* Blue instruction box background */}
-      <div style={{
-        position: 'absolute',
-        left: '255px',
-        top: '23px',
-        width: '930px',
-        height: '88px',
-        backgroundColor: '#cce5ff'
-      }} />
+    <div className="w-full h-screen bg-[#fefff8] flex justify-center items-stretch p-6 relative">
+      {/* Main content container - centered and fills available space */}
+      <div className="relative w-full max-w-[930px] flex flex-col gap-[18px]">
+        {/* Main instruction background image - grows to fill space */}
+        <div className="relative w-full flex-1 min-h-0">
+          <img src={instructionBg} alt="Instruction background" className="block w-full h-full max-w-none object-cover" />
+          
+          {/* Overlay 1 - Top left diagonal */}
+          <div className="absolute left-0 -top-px w-1/2 max-w-[474px] h-auto aspect-[474/274] hidden sm:block">
+            <img src={instructionOverlay1} alt="" className="block w-full h-full max-w-none" />
+          </div>
 
-      {/* Main instruction background image */}
-      <div style={{
-        position: 'absolute',
-        left: '255px',
-        top: '23px',
-        width: '930px',
-        height: '712px'
-      }}>
-        <img
-          src={instructionBg}
-          alt="Instruction background"
-          style={{
-            display: 'block',
-            width: '100%',
-            height: '100%',
-            maxWidth: 'none'
-          }}
-        />
-      </div>
-
-      {/* Overlay 1 - Top left diagonal */}
-      <div style={{
-        position: 'absolute',
-        left: '255px',
-        top: '23px',
-        width: '474px',
-        height: '274px'
-      }}>
-        <img
-          src={instructionOverlay1}
-          alt=""
-          style={{
-            display: 'block',
-            width: '100%',
-            height: '100%',
-            maxWidth: 'none'
-          }}
-        />
-      </div>
-
-      {/* Overlay 2 - Bottom right diagonal */}
-      <div style={{
-        position: 'absolute',
-        left: '955px',
-        top: '603px',
-        width: '230px',
-        height: '132px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
-      }}>
-        <div style={{
-          transform: 'rotate(180deg)',
-          width: '230px',
-          height: '132px'
-        }}>
-          <img
-            src={instructionOverlay2}
-            alt=""
-            style={{
-              display: 'block',
-              width: '100%',
-              height: '100%',
-              maxWidth: 'none'
-            }}
-          />
-        </div>
-      </div>
-
-      {/* Step number badge */}
-      <div style={{
-        position: 'absolute',
-        left: '693px',
-        top: '81px',
-        width: '55px',
-        height: '60px',
-        border: '1px solid #000000',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '10px'
-      }}>
-        <p style={{
-          fontFamily: 'Epilogue, sans-serif',
-          fontWeight: 600,
-          fontSize: '24px',
-          lineHeight: 'normal',
-          color: '#000000',
-          textAlign: 'center',
-          margin: 0,
-          width: '100%',
-          height: '20px'
-        }}>
-          {config.stepNumber}
-        </p>
-      </div>
-
-      {/* Placeholder outlines - pulses to show where bricks go (BEHIND bricks) */}
-      {config.placeholders.map((placeholder, index) => (
-        <div
-          key={`placeholder-${index}`}
-          className="placeholder-pulse"
-          style={{
-            position: 'absolute',
-            left: placeholder.left,
-            top: placeholder.top,
-            width: placeholder.width,
-            height: placeholder.height,
-            animation: 'pulsePlaceholder 2s ease-in-out infinite',
-            animationDelay: placeholder.animationDelay || '0s',
-            zIndex: 1
-          }}
-        >
-          <img
-            src={instructionPlaceholder}
-            alt=""
-            style={{
-              display: 'block',
-              width: '100%',
-              height: '100%',
-              maxWidth: 'none'
-            }}
-          />
-        </div>
-      ))}
-
-      {/* LEGO Bricks - rendered in order of zIndex (lowest first) */}
-      {[...config.bricks]
-        .sort((a, b) => a.zIndex - b.zIndex)
-        .map((brick, index) => renderBrick(brick, index))}
-
-      {/* Audio button */}
-      <button
-        onClick={handleAudioToggle}
-        style={{
-          position: 'absolute',
-          left: '1125px',
-          top: '45px',
-          width: '38px',
-          height: '38px',
-          border: 'none',
-          background: 'transparent',
-          cursor: 'pointer',
-          padding: 0
-        }}
-      >
-        <img
-          src={audioIcon}
-          alt="Audio toggle"
-          style={{
-            display: 'block',
-            width: '100%',
-            height: '100%',
-            maxWidth: 'none'
-          }}
-        />
-      </button>
-
-      {/* Back button */}
-      <button
-        onClick={handleBack}
-        style={{
-          position: 'absolute',
-          left: '255px',
-          top: '753px',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          border: '1px solid #939393',
-          borderRadius: '80px',
-          padding: '34px 41px',
-          background: 'transparent',
-          cursor: 'pointer',
-          transition: 'transform 0.2s',
-          width: 'auto',
-          height: 'auto'
-        }}
-        onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-        onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
-        className="back-button"
-      >
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          position: 'relative'
-        }}>
-          <div style={{
-            transform: 'rotate(180deg)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}>
-            <div style={{
-              width: '27px',
-              height: '14.72px',
-              position: 'relative'
-            }}>
-              <img
-                src={arrowBack}
-                alt="Back"
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  height: '100%',
-                  maxWidth: 'none'
-                }}
-              />
+          {/* Overlay 2 - Bottom right diagonal */}
+          <div className="absolute right-0 bottom-[10%] w-1/4 max-w-[230px] h-auto aspect-[230/132] hidden md:flex items-center justify-center">
+            <div className="rotate-180 w-full h-full">
+              <img src={instructionOverlay2} alt="" className="block w-full h-full max-w-none" />
             </div>
           </div>
+
+          {/* Step number badge - centered at top */}
+          <div className="absolute left-1/2 -translate-x-1/2 top-[10%] h-[60px] px-4 border border-black flex items-center justify-center bg-[#fefff8]/80">
+            <p className="font-epilogue font-semibold text-2xl text-black text-center">
+              {config.stepNumber}
+            </p>
+          </div>
+
+          {/* Audio button - top right */}
+          <button
+            onClick={handleAudioToggle}
+            className="absolute right-4 top-4 w-[38px] h-[38px] border-none bg-transparent cursor-pointer p-0 hover:scale-110 transition-transform"
+          >
+            <img src={audioIcon} alt="Audio toggle" className="block w-full h-full max-w-none" />
+          </button>
+
+          {/* Placeholder outlines */}
+          {config.placeholders.map((placeholder, index) => (
+            <div
+              key={`placeholder-${index}`}
+              className="absolute animate-pulse hidden lg:block"
+              style={{
+                left: `calc(${parseFloat(placeholder.left) / 930 * 100}%)`,
+                top: `calc(${parseFloat(placeholder.top) / 712 * 100}%)`,
+                width: `calc(${parseFloat(placeholder.width) / 930 * 100}%)`,
+                height: `calc(${parseFloat(placeholder.height) / 712 * 100}%)`,
+              }}
+            >
+              <img src={instructionPlaceholder} alt="" className="block w-full h-full max-w-none" />
+            </div>
+          ))}
+
+          {/* LEGO Bricks - scaled relative to container */}
+          <div className="hidden lg:block">
+            {[...config.bricks]
+              .sort((a, b) => a.zIndex - b.zIndex)
+              .map((brick, index) => {
+                const animationName = `fallBrick${index + 1}`;
+                return (
+                  <div
+                    key={brick.id}
+                    className="absolute opacity-0"
+                    style={{
+                      left: `calc(${parseFloat(brick.left) / 930 * 100}%)`,
+                      top: `calc(${parseFloat(brick.finalTop) / 712 * 100}%)`,
+                      width: `calc(${parseFloat(brick.width) / 930 * 100}%)`,
+                      height: `calc(${parseFloat(brick.height) / 712 * 100}%)`,
+                      animation: `${animationName} 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards`,
+                      animationDelay: brick.animationDelay,
+                      zIndex: brick.zIndex,
+                    }}
+                  >
+                    {brick.type === '4x1' ? <Brick4x1 /> : brick.type === '4x2' ? <Brick4x2 /> : 
+                      <img src={brickSingle} alt="LEGO brick" className="block w-full h-full max-w-none" />
+                    }
+                  </div>
+                );
+              })}
+          </div>
         </div>
-      </button>
 
-      {/* Next button */}
-      <button
-        onClick={handleNext}
-        style={{
-          position: 'absolute',
-          left: '519px',
-          top: '753px',
-          width: '399px',
-          height: '68px',
-          backgroundColor: '#000000',
-          color: '#fefff8',
-          borderRadius: '100px',
-          padding: '13.5px 30px',
-          fontFamily: 'Petrona, serif',
-          fontWeight: 500,
-          fontStyle: 'italic',
-          fontSize: '24px',
-          lineHeight: 'normal',
-          border: 'none',
-          cursor: 'pointer',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          transition: 'transform 0.2s',
-          overflow: 'hidden'
-        }}
-        onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.02)'}
-        onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
-      >
-        Next
-      </button>
+        {/* Bottom controls container */}
+        <div className="flex items-center justify-between w-full gap-4">
+          {/* Back button */}
+          <button
+            onClick={handleBack}
+            className="flex items-center justify-center border border-[#939393] rounded-[80px] px-6 py-4 sm:px-10 sm:py-8 bg-transparent cursor-pointer transition-transform hover:scale-105 shrink-0"
+          >
+            <div className="rotate-180 w-[20px] sm:w-[27px] h-[12px] sm:h-[15px]">
+              <img src={arrowBack} alt="Back" className="block w-full h-full max-w-none" />
+            </div>
+          </button>
 
-      {/* Animations and Media Queries */}
+          {/* Next button */}
+          <button
+            onClick={handleNext}
+            className="flex-1 max-w-[399px] h-[52px] sm:h-[68px] bg-black text-[#fefff8] rounded-[100px] px-6 sm:px-[30px] py-3 font-petrona font-medium italic text-lg sm:text-2xl border-none cursor-pointer flex items-center justify-center transition-transform hover:scale-[1.02] overflow-hidden"
+          >
+            Next
+          </button>
+        </div>
+      </div>
+
+      {/* Animations */}
       <style>{`
-        /* Falling brick animations - dynamically generated */
         ${generateKeyframes()}
-
-        /* Placeholder pulse animation */
-        @keyframes pulsePlaceholder {
-          0%, 100% {
-            opacity: 0.6;
-            transform: scale(1);
-          }
-          50% {
-            opacity: 1;
-            transform: scale(1.05);
-          }
-        }
-
-        .placeholder-pulse {
-          animation-timing-function: ease-in-out;
-        }
-
-        @media (max-width: 1280px) {
-          /* Center instruction box on smaller screens */
-          div[style*="left: 255px"][style*="930px"] {
-            left: 50% !important;
-            transform: translateX(-50%) !important;
-          }
-
-          div[style*="left: 693px"] {
-            left: 50% !important;
-            transform: translateX(-50%) !important;
-          }
-
-          button[style*="left: 519px"] {
-            left: 50% !important;
-            transform: translateX(-50%) !important;
-          }
-
-          .back-button {
-            left: calc(50% - 350px) !important;
-          }
-
-          button[style*="left: 1125px"] {
-            right: 2rem !important;
-            left: auto !important;
-          }
-        }
-
-        @media (max-width: 1024px) {
-          .back-button {
-            left: 2rem !important;
-          }
-        }
-
-        @media (max-width: 1024px) {
-          div[style*="930px"][style*="712px"],
-          div[style*="930px"][style*="88px"] {
-            width: calc(100vw - 4rem) !important;
-            max-width: 700px !important;
-          }
-
-          div[style*="left: 690px"],
-          div[style*="left: 596px"],
-          div[style*="left: 689.5px"] {
-            left: 50% !important;
-            transform: translateX(-50%) !important;
-          }
-        }
-
-        @media (max-width: 768px) {
-          div[style*="930px"][style*="712px"],
-          div[style*="930px"][style*="88px"] {
-            width: calc(100vw - 2rem) !important;
-            left: 1rem !important;
-            transform: none !important;
-          }
-
-          button[style*="399px"] {
-            width: calc(100% - 4rem) !important;
-            max-width: 400px !important;
-          }
-
-          div[style*="474px"][style*="274px"],
-          div[style*="230px"][style*="132px"] {
-            display: none !important;
-          }
+        
+        @keyframes pulse {
+          0%, 100% { opacity: 0.6; }
+          50% { opacity: 1; }
         }
       `}</style>
     </div>
