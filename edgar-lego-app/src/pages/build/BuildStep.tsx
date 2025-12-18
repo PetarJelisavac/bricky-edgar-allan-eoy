@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useBuildStore } from '../../store/buildStore';
+import { useBuildStore, type BrickColorName } from '../../store/buildStore';
 import { buildSteps } from '../../data/buildSteps';
 
-// Import color card assets
 import colorBaddyBlueBg from '../../assets/images/color-baddy-blue-bg.png';
 import colorWineBg from '../../assets/images/color-wine-bg.png';
 import colorSunshineBg from '../../assets/images/color-sunshine-bg.png';
@@ -18,24 +17,24 @@ import brickCoal from '../../assets/images/brick-coal.svg';
 import arrowBack from '../../assets/images/arrow-back.svg';
 
 const colorOptions = [
-  { name: 'Baddy Blue', background: colorBaddyBlueBg, brick: brickBaddyBlue },
-  { name: 'Wine', background: colorWineBg, brick: brickWine },
-  { name: 'Sunshine', background: colorSunshineBg, brick: brickSunshine },
-  { name: 'Rojo', background: colorRojoBg, brick: brickRojo },
-  { name: 'Coal', background: colorCoalBg, brick: brickCoal },
+  { name: 'Baddy Blue', background: colorBaddyBlueBg, brick: brickBaddyBlue, borderColor: '#5A9BD4' },
+  { name: 'Wine', background: colorWineBg, brick: brickWine, borderColor: '#D98FA3' },
+  { name: 'Sunshine', background: colorSunshineBg, brick: brickSunshine, borderColor: '#D4A84A' },
+  { name: 'Rojo', background: colorRojoBg, brick: brickRojo, borderColor: '#D98A8A' },
+  { name: 'Coal', background: colorCoalBg, brick: brickCoal, borderColor: '#9E9E9E' },
 ];
 
 function BuildStep() {
   const { stepId } = useParams();
   const navigate = useNavigate();
-  const { markStepCompleted } = useBuildStore();
+  const { markStepCompleted, setSelectedBrickColor } = useBuildStore();
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
 
   const currentStepIndex = parseInt(stepId || '0');
   const step = buildSteps[currentStepIndex];
 
   if (!step || step.type !== 'build') {
-    return <div>Step not found</div>;
+    return <div className="min-h-screen flex items-center justify-center">Step not found</div>;
   }
 
   const handleColorSelect = (colorName: string) => {
@@ -49,272 +48,94 @@ function BuildStep() {
   const handleNext = () => {
     if (!selectedColor) return;
 
+    // Save the selected color to the store
+    setSelectedBrickColor(selectedColor as BrickColorName);
+    
     markStepCompleted(step.id);
     const nextIndex = currentStepIndex + 1;
 
     if (nextIndex >= buildSteps.length) {
-      // TODO: Navigate to completion page when ready
       navigate('/build');
     } else {
       const nextStep = buildSteps[nextIndex];
       if (nextStep.type === 'build') {
-        // Navigate to instruction step for build types
         navigate(`/build/instruction/${nextIndex}`);
       }
     }
   };
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      backgroundColor: '#fefff8',
-      position: 'relative',
-      overflow: 'hidden'
-    }}>
-      {/* Heading */}
-      <h2 style={{
-        position: 'absolute',
-        left: 'calc(33.33% + 39px)',
-        top: '39px',
-        fontFamily: 'Epilogue, sans-serif',
-        fontWeight: 600,
-        fontSize: '36px',
-        lineHeight: 1.3,
-        color: '#000000',
-        whiteSpace: 'nowrap',
-        margin: 0
-      }}>
-        What color did you get?
-      </h2>
+    <div className="bg-[#fefff8] flex flex-col items-center gap-[24px] px-[22px] py-[24px] relative w-full h-screen">
+      {/* Header Row - Back button + Title */}
+      <div className="flex gap-[18px] items-center relative shrink-0 w-full">
+        {/* Back Button */}
+        <button
+          onClick={handleBack}
+          className="border border-[#939393] rounded-[80px] px-[41px] py-[34px] bg-transparent cursor-pointer transition-transform hover:scale-105 shrink-0 flex flex-col items-start"
+        >
+          <div className="flex items-center justify-center relative shrink-0">
+            <div className="rotate-180">
+              <div className="h-0 relative w-[27px]">
+                <div className="absolute -top-[7.36px] left-0 -right-[3.7%] -bottom-[7.36px]">
+                  <img src={arrowBack} alt="Back" className="block max-w-none w-full h-full" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </button>
 
-      {/* Color Cards */}
-      {colorOptions.map((color, index) => {
-        const positions = [
-          { left: '23px' },
-          { left: 'calc(16.67% + 67px)' },
-          { left: 'calc(33.33% + 111px)' },
-          { left: 'calc(58.33% + 35px)' },
-          { left: 'calc(75% + 79px)' }
-        ];
+        {/* Title - centered in remaining space */}
+        <div className="basis-0 flex grow items-center justify-center min-h-px min-w-px relative shrink-0">
+          <p className="font-['Epilogue'] font-semibold leading-[1.3] text-[36px] text-black whitespace-nowrap">
+            What color did you get?
+          </p>
+        </div>
+      </div>
 
-        const brickPositions = [
-          { left: '92px' },
-          { left: 'calc(25% + 16px)' },
-          { left: 'calc(41.67% + 60px)' },
-          { left: 'calc(58.33% + 104px)' },
-          { left: 'calc(83.33% + 28px)' }
-        ];
+      {/* Color Cards Row */}
+      <div className="flex gap-[25px] items-center relative shrink-0 w-full">
+        {colorOptions.map((color) => (
+          <button
+            key={color.name}
+            onClick={() => handleColorSelect(color.name)}
+            className="relative h-[712px] shrink-0 flex-1 p-0 cursor-pointer transition-all bg-transparent outline-none hover:scale-[1.01]"
+            style={{
+              border: selectedColor === color.name ? `2px solid ${color.borderColor}` : '2px solid transparent'
+            }}
+          >
+            {/* Background Image */}
+            <img
+              src={color.background}
+              alt={`${color.name} background`}
+              className="block max-w-none w-full h-full object-cover"
+            />
 
-        const labelPositions = [
-          { left: 'calc(8.33% + 126px)' },
-          { left: 'calc(25% + 168px)' },
-          { left: 'calc(41.67% + 210px)' },
-          { left: 'calc(66.67% + 138px)' },
-          { left: 'calc(83.33% + 180px)' }
-        ];
-
-        return (
-          <div key={color.name}>
-            {/* Background Card */}
-            <button
-              onClick={() => handleColorSelect(color.name)}
-              style={{
-                position: 'absolute',
-                ...positions[index],
-                top: '110px',
-                width: '259px',
-                height: '712px',
-                border: selectedColor === color.name ? '4px solid #000000' : 'none',
-                padding: 0,
-                cursor: 'pointer',
-                transition: 'transform 0.2s, border 0.2s',
-                background: 'transparent',
-                outline: 'none'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'scale(1.02)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'scale(1)';
-              }}
-            >
-              <img
-                src={color.background}
-                alt={`${color.name} background`}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  height: '100%',
-                  maxWidth: 'none'
-                }}
-              />
-            </button>
-
-            {/* LEGO Brick */}
-            <div style={{
-              position: 'absolute',
-              ...brickPositions[index],
-              top: '401px',
-              width: '121.541px',
-              height: '121.316px',
-              pointerEvents: 'none'
-            }}>
+            {/* LEGO Brick - centered */}
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[121.541px] h-[121.316px] pointer-events-none">
               <img
                 src={color.brick}
                 alt={`${color.name} brick`}
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  height: '100%',
-                  maxWidth: 'none'
-                }}
+                className="block max-w-none w-full h-full"
               />
             </div>
 
-            {/* Label */}
-            <p style={{
-              position: 'absolute',
-              ...labelPositions[index],
-              top: '770px',
-              width: '122px',
-              height: '14px',
-              fontFamily: 'Epilogue, sans-serif',
-              fontWeight: 500,
-              fontSize: '14px',
-              lineHeight: index === 0 ? 1.1 : 'normal',
-              color: '#000000',
-              textAlign: 'right',
-              transform: 'translateX(-100%)',
-              margin: 0,
-              pointerEvents: 'none'
-            }}>
+            {/* Label - at bottom */}
+            <p className="absolute bottom-[58px] left-1/2 -translate-x-1/2 font-['Epilogue'] font-medium text-[14px] leading-[1.1] text-black text-center pointer-events-none">
               {color.name}
             </p>
-          </div>
-        );
-      })}
-
-      {/* Back Button */}
-      <button
-        onClick={handleBack}
-        style={{
-          position: 'fixed',
-          bottom: '3rem',
-          left: '3rem',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          border: '1px solid #939393',
-          borderRadius: '80px',
-          padding: '34px 41px',
-          background: 'transparent',
-          cursor: 'pointer',
-          transition: 'transform 0.2s',
-          zIndex: 10
-        }}
-        onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-        onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
-      >
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          transform: 'rotate(180deg)'
-        }}>
-          <div style={{
-            width: '27px',
-            height: '14.72px',
-            position: 'relative'
-          }}>
-            <img
-              src={arrowBack}
-              alt="Back"
-              style={{
-                display: 'block',
-                width: '100%',
-                height: '100%',
-                maxWidth: 'none'
-              }}
-            />
-          </div>
-        </div>
-      </button>
+          </button>
+        ))}
+      </div>
 
       {/* Continue Button - appears when color is selected */}
       {selectedColor && (
         <button
           onClick={handleNext}
-          style={{
-            position: 'fixed',
-            bottom: '3rem',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            backgroundColor: '#000000',
-            color: '#fefff8',
-            padding: '0.84375rem 1.875rem',
-            height: '4.25rem',
-            borderRadius: '6.25rem',
-            fontFamily: 'Petrona, serif',
-            fontWeight: 500,
-            fontStyle: 'italic',
-            fontSize: '1.5rem',
-            lineHeight: 'normal',
-            border: 'none',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            transition: 'transform 0.2s',
-            zIndex: 10,
-            minWidth: '12rem'
-          }}
-          onMouseOver={(e) => e.currentTarget.style.transform = 'translateX(-50%) scale(1.02)'}
-          onMouseOut={(e) => e.currentTarget.style.transform = 'translateX(-50%) scale(1)'}
+          className="fixed bottom-8 left-1/2 -translate-x-1/2 bg-black text-[#fefff8] px-[30px] py-[13.5px] h-[68px] rounded-[100px] font-['Petrona'] font-medium italic text-[24px] leading-normal border-none cursor-pointer flex items-center justify-center transition-transform hover:scale-[1.02] z-10 min-w-[200px]"
         >
           Continue
         </button>
       )}
-
-      {/* Media Queries */}
-      <style>{`
-        @media (max-width: 1400px) {
-          h2[style*="calc(33.33% + 39px)"] {
-            left: 50% !important;
-            transform: translateX(-50%) !important;
-            white-space: normal !important;
-            text-align: center !important;
-            top: 2rem !important;
-          }
-        }
-
-        @media (max-width: 768px) {
-          /* Stack cards vertically on mobile */
-          button[style*="position: absolute"][style*="259px"] {
-            position: static !important;
-            width: 100% !important;
-            max-width: 320px !important;
-            height: 400px !important;
-            margin: 1rem auto !important;
-            display: block !important;
-          }
-
-          div[style*="121.541px"] {
-            position: absolute !important;
-            left: 50% !important;
-            transform: translateX(-50%) !important;
-            top: 180px !important;
-          }
-
-          p[style*="translateX(-100%)"] {
-            position: absolute !important;
-            left: 50% !important;
-            transform: translateX(-50%) !important;
-            text-align: center !important;
-            bottom: 2rem !important;
-            top: auto !important;
-          }
-        }
-      `}</style>
     </div>
   );
 }

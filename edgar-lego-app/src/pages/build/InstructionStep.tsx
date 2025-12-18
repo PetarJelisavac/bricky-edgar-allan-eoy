@@ -3,9 +3,7 @@ import { useBuildStore } from '../../store/buildStore';
 import { buildSteps } from '../../data/buildSteps';
 import { instructionConfigs } from '../../data/instructionConfigs';
 
-import instructionBg from '../../assets/images/instruction-bg.png';
-import instructionOverlay1 from '../../assets/images/instruction-overlay-1.svg';
-import instructionOverlay2 from '../../assets/images/instruction-overlay-2.svg';
+import buildingBackground from '../../assets/images/Building.Background.png';
 import instructionPlaceholder from '../../assets/images/instruction-placeholder.svg';
 import audioIcon from '../../assets/images/audio-icon.svg';
 import arrowBack from '../../assets/images/arrow-back.svg';
@@ -81,19 +79,7 @@ function InstructionStep() {
       <div className="relative w-full max-w-[930px] flex flex-col gap-[18px]">
         {/* Main instruction background image - grows to fill space */}
         <div className="relative w-full flex-1 min-h-0">
-          <img src={instructionBg} alt="Instruction background" className="block w-full h-full max-w-none object-cover" />
-          
-          {/* Overlay 1 - Top left diagonal */}
-          <div className="absolute left-0 -top-px w-1/2 max-w-[474px] h-auto aspect-[474/274] hidden sm:block">
-            <img src={instructionOverlay1} alt="" className="block w-full h-full max-w-none" />
-          </div>
-
-          {/* Overlay 2 - Bottom right diagonal */}
-          <div className="absolute right-0 bottom-[10%] w-1/4 max-w-[230px] h-auto aspect-[230/132] hidden md:flex items-center justify-center">
-            <div className="rotate-180 w-full h-full">
-              <img src={instructionOverlay2} alt="" className="block w-full h-full max-w-none" />
-            </div>
-          </div>
+          <img src={buildingBackground} alt="Building background" className="block w-full h-full max-w-none object-cover rounded-lg" />
 
           {/* Step number badge - centered at top */}
           <div className="absolute left-1/2 -translate-x-1/2 top-[10%] h-[60px] px-4 border border-black flex items-center justify-center bg-[#fefff8]/80">
