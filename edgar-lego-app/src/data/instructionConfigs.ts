@@ -20,9 +20,19 @@ export interface PlaceholderConfig {
   animationDelay?: string;
 }
 
+export interface StaticBrickConfig {
+  type: '4x1' | '4x2' | 'single';
+  left: string;
+  top: string;
+  width: string;
+  height: string;
+  zIndex: number;
+}
+
 export interface InstructionConfig {
   stepNumber: number;
-  bricks: BrickConfig[];
+  staticBricks: StaticBrickConfig[]; // Bricks from previous steps that are already built
+  bricks: BrickConfig[]; // New bricks that animate in
   placeholders: PlaceholderConfig[];
 }
 
@@ -31,6 +41,7 @@ export const instructionConfigs: Record<number, InstructionConfig> = {
   // Positions are relative to the content container (930px wide)
   2: {
     stepNumber: 1,
+    staticBricks: [], // First step, no previous bricks
     bricks: [
       {
         id: 'brick-1',
@@ -74,6 +85,25 @@ export const instructionConfigs: Record<number, InstructionConfig> = {
   // Step 3 (index 3) - Four 4x1 bricks (two pairs)
   3: {
     stepNumber: 2,
+    staticBricks: [
+      // Bricks from step 2 that should remain visible
+      {
+        type: 'single',
+        left: '435px',
+        top: '418px',
+        width: '120.001px',
+        height: '80.501px',
+        zIndex: 3,
+      },
+      {
+        type: 'single',
+        left: '341px',
+        top: '369px',
+        width: '120.001px',
+        height: '80.501px',
+        zIndex: 2,
+      },
+    ],
     bricks: [
       {
         id: 'brick-1',

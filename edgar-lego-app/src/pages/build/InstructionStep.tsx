@@ -73,6 +73,30 @@ function InstructionStep() {
     `).join('\n');
   };
 
+  const renderStaticBrick = (brickConfig: typeof config.staticBricks[0], index: number) => {
+    const containerStyle: React.CSSProperties = {
+      position: 'absolute',
+      left: `calc(${parseFloat(brickConfig.left) / 930 * 100}%)`,
+      top: `calc(${parseFloat(brickConfig.top) / 712 * 100}%)`,
+      width: `calc(${parseFloat(brickConfig.width) / 930 * 100}%)`,
+      height: `calc(${parseFloat(brickConfig.height) / 712 * 100}%)`,
+      zIndex: brickConfig.zIndex,
+    };
+
+    if (brickConfig.type === '4x1') {
+      return <div key={`static-brick-${index}`} style={containerStyle}><Brick4x1 /></div>;
+    } else if (brickConfig.type === '4x2') {
+      return <div key={`static-brick-${index}`} style={containerStyle}><Brick4x2 /></div>;
+    } else if (brickConfig.type === 'single') {
+      return (
+        <div key={`static-brick-${index}`} style={containerStyle}>
+          <img src={brickSingle} alt="LEGO brick" className="block w-full h-full max-w-none" />
+        </div>
+      );
+    }
+    return null;
+  };
+
   return (
     <div className="w-full h-screen bg-[#fefff8] flex justify-center items-stretch p-6 relative">
       {/* Main content container - centered and fills available space */}
@@ -114,6 +138,10 @@ function InstructionStep() {
 
           {/* LEGO Bricks - scaled relative to container */}
           <div className="hidden lg:block">
+            {/* Static bricks from previous steps */}
+            {config.staticBricks?.map((staticBrick, index) => renderStaticBrick(staticBrick, index))}
+
+            {/* Animated bricks for current step */}
             {[...config.bricks]
               .sort((a, b) => a.zIndex - b.zIndex)
               .map((brick, index) => {
