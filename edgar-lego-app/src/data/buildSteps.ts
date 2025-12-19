@@ -28,19 +28,18 @@ export const buildSteps: BuildStep[] = [
   },
   {
     id: 3,
-    type: 'question',
+    type: 'build',
     content: {
-      question: 'Placeholder question',
-      type: 'multiple-choice',
+      instruction: 'Continue building',
+      bricks: [],
     },
   },
   {
     id: 4,
-    type: 'video',
+    type: 'build',
     content: {
-      videoUrl: '',
-      title: 'Behind the Scenes',
-      description: 'See how Edgar Allan came to life',
+      instruction: 'Add more details',
+      bricks: [],
     },
   },
   {

@@ -47,9 +47,9 @@ export const instructionConfigs: Record<number, InstructionConfig> = {
       {
         id: 'brick-1',
         type: '4x1',
-        left: '335px',
-        top: '280px',
-        finalTop: '280px',
+        left: '341px',
+        top: '481px',
+        finalTop: '481px',
         width: '120px',
         height: '80.5px',
         animationDelay: '0s',
@@ -59,9 +59,9 @@ export const instructionConfigs: Record<number, InstructionConfig> = {
       {
         id: 'brick-2',
         type: '4x1',
-        left: '475px',
-        top: '330px',
-        finalTop: '330px',
+        left: '435px',
+        top: '530px',
+        finalTop: '530px',
         width: '120px',
         height: '80.5px',
         animationDelay: '0.3s',
@@ -70,148 +70,122 @@ export const instructionConfigs: Record<number, InstructionConfig> = {
     ],
     placeholders: [
       {
-        left: '335px',
-        top: '390px',
+        left: '341px',
+        top: '480px',
         width: '118px',
         height: '78.5px',
       },
       {
-        left: '475px',
-        top: '440px',
+        left: '434.5px',
+        top: '530px',
         width: '118px',
         height: '78.5px',
         animationDelay: '0.3s',
       },
     ],
   },
-  // Step 2 (index 3) - Four 4x2 bricks in two pairs
-  // Based on Figma design: https://www.figma.com/design/lLpX6OSZHOGKcHxsuOnJQ3/EOY_LegoAssets?node-id=139-18074
+  // Step 2 (index 3) - Two 4x2 bricks
+  // Based on Figma design: https://www.figma.com/design/lLpX6OSZHOGKcHxsuOnJQ3/EOY_LegoAssets?node-id=70-13175
   3: {
     stepNumber: 2,
     staticBricks: [
-      // Bricks from step 1 that should remain visible
+      // Bricks from step 1 that should remain visible at the bottom
       {
         type: '4x1',
-        left: '335px',
-        top: '280px',
+        left: '341px',
+        top: '481px',
         width: '120px',
         height: '80.5px',
-        zIndex: 2,
+        zIndex: 1,
       },
       {
         type: '4x1',
-        left: '475px',
-        top: '330px',
+        left: '435px',
+        top: '530px',
         width: '120px',
         height: '80.5px',
         zIndex: 1,
       },
     ],
     bricks: [
-      // Upper left brick
+      // Upper left 4x2 brick
       {
         id: 'brick-1',
         type: '4x2',
-        left: '340px',
-        top: '240px',
-        finalTop: '240px',
+        left: '341px',
+        top: '237px',
+        finalTop: '237px',
         width: '120px',
-        height: '122px',
+        height: '113px',
         animationDelay: '0s',
         zIndex: 3,
       },
-      // Upper right brick
+      // Upper right 4x2 brick
       {
         id: 'brick-2',
         type: '4x2',
-        left: '470px',
-        top: '290px',
-        finalTop: '290px',
+        left: '436px',
+        top: '300px',
+        finalTop: '300px',
         width: '120px',
-        height: '122px',
-        animationDelay: '0.2s',
+        height: '113px',
+        animationDelay: '0.3s',
         zIndex: 2,
-      },
-      // Lower left brick
-      {
-        id: 'brick-3',
-        type: '4x2',
-        left: '340px',
-        top: '480px',
-        finalTop: '480px',
-        width: '120px',
-        height: '122px',
-        animationDelay: '0.4s',
-        zIndex: 2,
-      },
-      // Lower right brick
-      {
-        id: 'brick-4',
-        type: '4x2',
-        left: '470px',
-        top: '530px',
-        finalTop: '530px',
-        width: '120px',
-        height: '122px',
-        animationDelay: '0.6s',
-        zIndex: 1,
       },
     ],
-    placeholders: [],
+    placeholders: [
+      {
+        left: '341px',
+        top: '480px',
+        width: '118px',
+        height: '78.5px',
+      },
+      {
+        left: '434.5px',
+        top: '530px',
+        width: '118px',
+        height: '78.5px',
+        animationDelay: '0.3s',
+      },
+    ],
   },
   // Step 3 (index 4) - Additional bricks
   4: {
     stepNumber: 3,
     staticBricks: [
-      // Bricks from step 1
+      // Bricks from step 1 (at the bottom)
       {
         type: '4x1',
-        left: '335px',
-        top: '280px',
+        left: '341px',
+        top: '481px',
         width: '120px',
         height: '80.5px',
-        zIndex: 4,
+        zIndex: 1,
       },
       {
         type: '4x1',
-        left: '475px',
-        top: '330px',
-        width: '120px',
-        height: '80.5px',
-        zIndex: 3,
-      },
-      // Bricks from step 2
-      {
-        type: '4x2',
-        left: '340px',
-        top: '240px',
-        width: '120px',
-        height: '122px',
-        zIndex: 3,
-      },
-      {
-        type: '4x2',
-        left: '470px',
-        top: '290px',
-        width: '120px',
-        height: '122px',
-        zIndex: 2,
-      },
-      {
-        type: '4x2',
-        left: '340px',
-        top: '480px',
-        width: '120px',
-        height: '122px',
-        zIndex: 2,
-      },
-      {
-        type: '4x2',
-        left: '470px',
+        left: '435px',
         top: '530px',
         width: '120px',
-        height: '122px',
+        height: '80.5px',
         zIndex: 1,
+      },
+      // Bricks from step 2 (at the top)
+      {
+        type: '4x2',
+        left: '341px',
+        top: '237px',
+        width: '120px',
+        height: '113px',
+        zIndex: 3,
+      },
+      {
+        type: '4x2',
+        left: '436px',
+        top: '300px',
+        width: '120px',
+        height: '113px',
+        zIndex: 2,
       },
     ],
     bricks: [
