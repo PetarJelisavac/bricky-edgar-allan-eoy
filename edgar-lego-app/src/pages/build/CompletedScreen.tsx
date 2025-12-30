@@ -14,7 +14,6 @@ function CompletedScreen() {
   const streamRef = useRef<MediaStream | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // Start camera when showCamera is true (desktop)
   useEffect(() => {
     if (showCamera && videoRef.current) {
       navigator.mediaDevices
@@ -39,14 +38,10 @@ function CompletedScreen() {
   }, [showCamera]);
 
   const handleTakePicture = () => {
-    // Check if mobile device
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
     if (isMobile) {
-      // On mobile, trigger file input to open camera
       fileInputRef.current?.click();
     } else {
-      // On desktop, show video stream
       setShowCamera(true);
     }
   };
@@ -77,7 +72,6 @@ function CompletedScreen() {
         setCapturedImage(imageDataUrl);
         setShowCamera(false);
 
-        // Stop camera stream
         if (streamRef.current) {
           streamRef.current.getTracks().forEach((track) => track.stop());
         }
@@ -124,7 +118,6 @@ function CompletedScreen() {
       alignItems: 'center',
       display: 'flex'
     }}>
-      {/* Main content container */}
       <div style={{
         width: '937px',
         maxWidth: '100%',
@@ -136,7 +129,6 @@ function CompletedScreen() {
         position: 'relative',
         zIndex: 1
       }}>
-        {/* LEGO Edgar display area */}
         <div style={{
           alignSelf: 'stretch',
           height: '624px',
@@ -157,7 +149,6 @@ function CompletedScreen() {
           />
         </div>
 
-        {/* Bottom controls */}
         <div style={{
           alignSelf: 'stretch',
           display: 'flex',
@@ -165,7 +156,6 @@ function CompletedScreen() {
           justifyContent: 'space-between',
           gap: '16px'
         }}>
-          {/* Back button */}
           <button
             onClick={handleBack}
             style={{
@@ -194,7 +184,6 @@ function CompletedScreen() {
             </div>
           </button>
 
-          {/* Take a picture button */}
           <button
             onClick={handleTakePicture}
             style={{
@@ -222,7 +211,6 @@ function CompletedScreen() {
             Take a picture!
           </button>
 
-          {/* Hidden file input for mobile */}
           <input
             ref={fileInputRef}
             type="file"
@@ -234,37 +222,46 @@ function CompletedScreen() {
         </div>
       </div>
 
-      {/* Marquee Text - positioned absolutely */}
-      <div style={{
-        position: 'absolute',
-        left: 0,
-        top: '350px',
-        width: '100vw',
-        pointerEvents: 'none',
-        zIndex: 10,
-        overflow: 'visible'
-      }}>
-        <div className="marquee-wrapper">
-          <div className="marquee-content">
-            {/* First set */}
-            <span className="marquee-text">💥 We did it! 🧰</span>
-            <span className="marquee-text">💥 We did it! 🧰</span>
-            <span className="marquee-text">💥 We did it! 🧰</span>
-            <span className="marquee-text">💥 We did it! 🧰</span>
-            <span className="marquee-text">💥 We did it! 🧰</span>
-            <span className="marquee-text">💥 We did it! 🧰</span>
-            {/* Duplicate set for seamless loop */}
-            <span className="marquee-text">💥 We did it! 🧰</span>
-            <span className="marquee-text">💥 We did it! 🧰</span>
-            <span className="marquee-text">💥 We did it! 🧰</span>
-            <span className="marquee-text">💥 We did it! 🧰</span>
-            <span className="marquee-text">💥 We did it! 🧰</span>
-            <span className="marquee-text">💥 We did it! 🧰</span>
-          </div>
+      <div
+        style={{
+          position: 'fixed',
+          left: 0,
+          top: '55vh',
+          width: '100vw',
+          pointerEvents: 'none',
+          zIndex: 9999,
+          overflow: 'hidden'
+        }}
+      >
+        <div
+          className="marquee-track"
+          style={{
+            display: 'flex',
+            gap: '60px',
+            width: 'fit-content'
+          }}
+        >
+          {[...Array(20)].map((_, i) => (
+            <span
+              key={i}
+              style={{
+                fontFamily: 'Epilogue, sans-serif',
+                fontWeight: 600,
+                fontSize: 'clamp(80px, 20vw, 270px)',
+                lineHeight: 1,
+                whiteSpace: 'nowrap',
+                WebkitTextStroke: 'clamp(1px, 0.3vw, 3px) black',
+                WebkitTextFillColor: 'transparent',
+                color: 'transparent',
+                flexShrink: 0
+              }}
+            >
+              💥 We did it! 🧰
+            </span>
+          ))}
         </div>
       </div>
 
-      {/* Camera Section - Desktop video stream */}
       {showCamera && (
         <div style={{
           position: 'fixed',
@@ -347,7 +344,6 @@ function CompletedScreen() {
         </div>
       )}
 
-      {/* Preview Section - Show captured image */}
       {capturedImage && !showCamera && (
         <div style={{
           position: 'fixed',
@@ -423,51 +419,17 @@ function CompletedScreen() {
         </div>
       )}
 
-      {/* Marquee Styles */}
       <style>{`
-        .marquee-wrapper {
-          width: 100%;
-          overflow: visible;
-          position: relative;
+        .marquee-track {
+          animation: marquee-scroll 120s linear infinite;
         }
 
-        .marquee-content {
-          display: inline-flex;
-          animation: scroll 80s linear infinite;
-          will-change: transform;
-          gap: 60px;
-        }
-
-        .marquee-text {
-          font-family: 'Epilogue', sans-serif;
-          font-weight: 600;
-          font-size: 270px;
-          line-height: 1;
-          white-space: nowrap;
-          -webkit-text-stroke: 3px black;
-          -webkit-text-fill-color: transparent;
-          color: transparent;
-          flex-shrink: 0;
-          display: inline-block;
-        }
-
-        @keyframes scroll {
-          0% {
-            transform: translateX(0%);
+        @keyframes marquee-scroll {
+          from {
+            transform: translateX(0);
           }
-          100% {
+          to {
             transform: translateX(-50%);
-          }
-        }
-
-        @media (max-width: 768px) {
-          .marquee-text {
-            font-size: 120px;
-            -webkit-text-stroke: 2px black;
-          }
-
-          .marquee-content {
-            animation: scroll 120s linear infinite;
           }
         }
       `}</style>
