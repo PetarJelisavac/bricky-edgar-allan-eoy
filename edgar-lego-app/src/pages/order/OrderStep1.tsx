@@ -31,36 +31,36 @@ function OrderStep1() {
         display: 'flex',
         flexDirection: 'column',
         gap: '3.3125rem',
-        width: '100%'
+        width: '100%',
+        flex: 1
       }}>
         {/* Logo and Title */}
         <div style={{
           display: 'flex',
-          gap: '0.6875rem',
+          gap: '40px',
           alignItems: 'center',
           flexWrap: 'wrap'
-        }} className="order-header">
+        }}>
           <img
             src={logoLego}
             alt="Edgar Allan LEGO Logo"
             style={{
-              width: '7.5rem',
-              height: '7.5rem',
+              width: '120px',
+              height: '120px',
               flexShrink: 0
             }}
-            className="order-logo"
           />
           <p style={{
             fontFamily: 'Epilogue, sans-serif',
             fontWeight: 600,
-            fontSize: '2.875rem',
+            fontSize: '36px',
             color: 'black',
-            letterSpacing: '-0.0575rem',
-            lineHeight: 1,
-            maxWidth: '41.75rem',
+            letterSpacing: '-0.02em',
+            lineHeight: 1.1,
+            maxWidth: '668px',
             margin: 0,
             flex: '1 1 auto'
-          }} className="order-title">
+          }}>
             Building Together Brick Set
           </p>
         </div>
@@ -68,40 +68,47 @@ function OrderStep1() {
         {/* Main Content Area */}
         <div style={{
           display: 'flex',
-          gap: 'clamp(30px, 5vw, 80px)',
+          gap: '80px',
           alignItems: 'center',
           width: '100%',
+          flex: '1 1 0%',
+          minHeight: '0',
           flexWrap: 'wrap'
-        }} className="order-main">
+        }} className="order-main-container">
           {/* Left Side - Progress Indicators */}
           <div style={{
             display: 'flex',
             flexDirection: 'column',
-            gap: '2.5rem',
-            width: '25rem',
+            gap: 'clamp(16px, 2vw, 40px)',
+            width: '400px',
+            height: '100%',
+            justifyContent: 'center',
+            padding: '0 clamp(8px, 1.5vw, 16px)',
             flexShrink: 0
           }} className="order-sidebar">
             {/* Step 1 - Active with Box Image */}
             <div style={{
               display: 'flex',
-              gap: '5rem',
+              gap: 'clamp(20px, 3vw, 40px)',
               alignItems: 'center',
-              padding: '1rem'
+              padding: 'clamp(8px, 1vw, 16px)',
+              flex: '1 1 auto'
             }}>
               <div style={{
                 backgroundColor: '#d9d9d9',
                 borderRadius: '100px',
-                width: '1.5rem',
-                height: '1.5rem',
+                width: 'clamp(16px, 2vw, 24px)',
+                height: 'clamp(16px, 2vw, 24px)',
                 flexShrink: 0
               }} />
               <div style={{
                 position: 'relative',
-                width: '16.5625rem', // 265px
-                height: '11.0925rem', // 177.48px
+                width: '100%',
+                height: '100%',
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center'
+                justifyContent: 'center',
+                flex: '1 1 auto'
               }}>
                 <img
                   src={boxImage}
@@ -109,7 +116,9 @@ function OrderStep1() {
                   style={{
                     width: '100%',
                     height: '100%',
-                    objectFit: 'cover'
+                    objectFit: 'contain',
+                    maxWidth: '265px',
+                    maxHeight: '177px'
                   }}
                 />
               </div>
@@ -118,24 +127,26 @@ function OrderStep1() {
             {/* Step 2 - Inactive with vertical image */}
             <div style={{
               display: 'flex',
-              gap: '5rem',
+              gap: 'clamp(20px, 3vw, 40px)',
               alignItems: 'center',
-              padding: '1rem'
+              padding: 'clamp(8px, 1vw, 16px)',
+              flex: '1 1 auto'
             }}>
               <div style={{
                 backgroundColor: '#d9d9d9',
                 borderRadius: '100px',
-                width: '1.5rem',
-                height: '1.5rem',
+                width: 'clamp(16px, 2vw, 24px)',
+                height: 'clamp(16px, 2vw, 24px)',
                 flexShrink: 0
               }} />
               <div style={{
                 position: 'relative',
-                width: '11.625rem', // 186px
-                height: '18.0625rem', // 289px
+                width: '100%',
+                height: '100%',
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center'
+                justifyContent: 'center',
+                flex: '1 1 auto'
               }}>
                 <img
                   src={image16}
@@ -143,7 +154,9 @@ function OrderStep1() {
                   style={{
                     width: '100%',
                     height: '100%',
-                    objectFit: 'cover'
+                    objectFit: 'contain',
+                    maxWidth: '186px',
+                    maxHeight: '289px'
                   }}
                 />
               </div>
@@ -153,14 +166,14 @@ function OrderStep1() {
           {/* Right Side - Form Card */}
           <div style={{
             border: '1px solid #c6c6c6',
-            borderRadius: '1.875rem',
-            padding: '3.75rem',
+            borderRadius: 'clamp(16px, 2vw, 30px)',
+            padding: 'clamp(20px, 3vw, 60px)',
             width: '100%',
-            maxWidth: '48.75rem',
-            flex: '1 1 auto',
+            maxWidth: 'clamp(400px, 50vw, 780px)',
             display: 'flex',
             flexDirection: 'column',
-            gap: '2.5rem'
+            gap: 'clamp(16px, 2vw, 40px)',
+            flex: '1 1 auto'
           }} className="order-card">
             {/* Step Label and Question */}
             <div style={{
@@ -209,18 +222,17 @@ function OrderStep1() {
                 placeholder=""
                 style={{
                   fontFamily: 'Epilogue, sans-serif',
-                  fontSize: '1.875rem',
-                  lineHeight: '2.5rem',
+                  fontSize: '20px',
+                  lineHeight: '1.4',
                   color: 'black',
                   border: 'none',
                   borderBottom: '3px solid #1169fe',
                   outline: 'none',
-                  padding: '0 0 0.3125rem 0',
+                  padding: '0 0 4px 0',
                   backgroundColor: 'transparent',
                   width: '100%',
-                  height: '3.125rem'
+                  height: 'clamp(44px, 5vw, 50px)'
                 }}
-                className="order-input"
               />
 
               {/* Next Button */}
@@ -231,10 +243,10 @@ function OrderStep1() {
                   style={{
                     backgroundColor: '#fefff8',
                     border: '1px solid #1169fe',
-                    borderRadius: '1.875rem',
-                    padding: '0.84375rem 1.875rem',
-                    height: '3.125rem',
-                    minWidth: '9.375rem',
+                    borderRadius: '9999px',
+                    padding: 'clamp(12px, 1.5vw, 18px) clamp(20px, 2.5vw, 30px)',
+                    height: 'clamp(44px, 5vw, 50px)',
+                    minWidth: 'clamp(100px, 12vw, 150px)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -242,13 +254,12 @@ function OrderStep1() {
                     opacity: name.trim() ? 1 : 0.5,
                     transition: 'opacity 0.2s'
                   }}
-                  className="order-button"
                 >
                   <p style={{
                     fontFamily: 'Petrona, serif',
                     fontWeight: 500,
                     fontStyle: 'italic',
-                    fontSize: '1.25rem',
+                    fontSize: 'clamp(16px, 1.8vw, 20px)',
                     color: '#1169fe',
                     margin: 0
                   }}>
@@ -261,64 +272,58 @@ function OrderStep1() {
         </div>
       </div>
 
-      {/* Media Queries */}
+      {/* Responsive Media Queries */}
       <style>{`
-        @media (max-width: 1024px) {
-          .order-container {
-            padding: 1.5rem !important;
-          }
-          .order-header {
-            gap: 0.5rem !important;
-          }
-          .order-logo {
-            width: 5rem !important;
-            height: 5rem !important;
-          }
-          .order-title {
-            font-size: 2rem !important;
-          }
-          .order-main {
-            gap: 2rem !important;
+        @media (min-width: 1200px) {
+          .order-main-container {
+            flex-direction: row !important;
+            flex-wrap: nowrap !important;
+            gap: 80px !important;
+            margin: 0 !important;
+            padding: 0 !important;
           }
           .order-sidebar {
-            width: 18rem !important;
-            gap: 1.5rem !important;
+            width: 400px !important;
+            flex-shrink: 0 !important;
+            margin: 0 !important;
+          }
+          .order-card {
+            flex: 1 1 auto !important;
+            max-width: 780px !important;
+            margin: 0 !important;
           }
         }
-
+        
+        @media (max-width: 1199px) {
+          .order-main-container {
+            flex-direction: column !important;
+            align-items: center !important;
+            gap: 80px !important;
+            margin: 0 !important;
+            padding: 0 !important;
+          }
+          .order-sidebar {
+            width: 100% !important;
+            max-width: 400px !important;
+            margin: 0 !important;
+          }
+          .order-card {
+            width: 100% !important;
+            max-width: 780px !important;
+            margin: 0 !important;
+          }
+        }
+        
         @media (max-width: 768px) {
           .order-container {
             padding: 1rem !important;
           }
-          .order-logo {
-            width: 4rem !important;
-            height: 4rem !important;
-          }
-          .order-title {
-            font-size: 1.5rem !important;
-          }
-          .order-sidebar {
-            display: none !important;
-          }
-          .order-card {
-            padding: 2rem !important;
-            gap: 1.5rem !important;
-          }
-          .order-question {
-            font-size: 1.75rem !important;
-            line-height: 2.25rem !important;
-          }
-          .order-input {
-            font-size: 1.25rem !important;
-            height: 2.5rem !important;
-          }
-          .order-button {
-            width: 100% !important;
-            height: 3rem !important;
-          }
         }
-
+        
         @media (max-width: 480px) {
+          .order-container {
+            padding: 0.75rem !important;
+          }
           .order-title {
             font-size: 1.25rem !important;
           }

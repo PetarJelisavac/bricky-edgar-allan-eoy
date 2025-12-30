@@ -39,7 +39,7 @@ function OrderStep5() {
         {/* Logo and Title */}
         <div style={{
           display: 'flex',
-          gap: 'clamp(8px, 1vw, 11px)',
+          gap: '40px',
           alignItems: 'center',
           flexWrap: 'wrap'
         }}>
@@ -47,15 +47,15 @@ function OrderStep5() {
             src={logoLego}
             alt="Edgar Allan LEGO Logo"
             style={{
-              width: 'clamp(80px, 10vw, 120px)',
-              height: 'clamp(80px, 10vw, 120px)',
+              width: '120px',
+              height: '120px',
               flexShrink: 0
             }}
           />
           <p style={{
             fontFamily: 'Epilogue, sans-serif',
             fontWeight: 600,
-            fontSize: 'clamp(24px, 3.5vw, 46px)',
+            fontSize: '36px',
             color: 'black',
             letterSpacing: '-0.02em',
             lineHeight: 1.1,
@@ -70,23 +70,23 @@ function OrderStep5() {
         {/* Main Content Area */}
         <div style={{
           display: 'flex',
-          gap: 'clamp(40px, 5vw, 80px)',
+          gap: '80px',
           alignItems: 'center',
           width: '100%',
           flex: 1,
           flexWrap: 'wrap'
-        }}>
+        }} className="order-main-container">
           {/* Left Side - Empty Spacer (same width as Step 2 color picker) */}
           <div style={{
             display: 'flex',
             flexDirection: 'column',
             gap: 'clamp(12px, 1.5vw, 16px)',
-            width: 'clamp(200px, 30vw, 400px)',
+            width: '400px',
             height: '100%',
             justifyContent: 'center',
             padding: '0 clamp(8px, 1.5vw, 16px)',
             flexShrink: 0
-          }}>
+          }} className="order-sidebar">
             {/* Empty - no color picker */}
           </div>
 
@@ -149,16 +149,16 @@ function OrderStep5() {
                 placeholder=""
                 style={{
                   fontFamily: 'Epilogue, sans-serif',
-                  fontSize: 'clamp(20px, 2.5vw, 30px)',
-                  lineHeight: '1.33',
+                  fontSize: 'clamp(16px, 1.5vw, 20px)',
+                  lineHeight: '1.4',
                   color: 'black',
                   border: 'none',
                   borderBottom: '3px solid #1169fe',
                   outline: 'none',
-                  padding: '0 0 5px 0',
+                  padding: '0 0 4px 0',
                   backgroundColor: 'transparent',
                   width: '100%',
-                  height: 'clamp(40px, 4vw, 50px)'
+                  height: 'clamp(44px, 5vw, 50px)'
                 }}
               />
 

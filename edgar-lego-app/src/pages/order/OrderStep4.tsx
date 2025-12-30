@@ -35,31 +35,30 @@ function OrderStep4() {
         {/* Logo and Title */}
         <div style={{
           display: 'flex',
-          gap: '0.6875rem',
+          gap: '40px',
           alignItems: 'center',
           flexWrap: 'wrap'
-        }} className="order-header">
+        }}>
           <img
             src={logoLego}
             alt="Edgar Allan LEGO Logo"
             style={{
-              width: '7.5rem',
-              height: '7.5rem',
+              width: '120px',
+              height: '120px',
               flexShrink: 0
             }}
-            className="order-logo"
           />
           <p style={{
             fontFamily: 'Epilogue, sans-serif',
             fontWeight: 600,
-            fontSize: '2.875rem',
+            fontSize: '36px',
             color: 'black',
-            letterSpacing: '-0.0575rem',
-            lineHeight: 1,
-            maxWidth: '41.75rem',
+            letterSpacing: '-0.02em',
+            lineHeight: 1.1,
+            maxWidth: '668px',
             margin: 0,
             flex: '1 1 auto'
-          }} className="order-title">
+          }}>
             Building Together Brick Set
           </p>
         </div>
@@ -67,23 +66,23 @@ function OrderStep4() {
         {/* Main Content Area */}
         <div style={{
           display: 'flex',
-          gap: 'clamp(40px, 5vw, 80px)',
+          gap: '80px',
           alignItems: 'center',
           width: '100%',
           flex: 1,
           flexWrap: 'wrap'
-        }}>
+        }} className="order-main-container">
           {/* Left Side - Empty Spacer (same width as Step 2 color picker) */}
           <div style={{
             display: 'flex',
             flexDirection: 'column',
             gap: 'clamp(12px, 1.5vw, 16px)',
-            width: 'clamp(200px, 30vw, 400px)',
+            width: '400px',
             height: '100%',
             justifyContent: 'center',
             padding: '0 clamp(8px, 1.5vw, 16px)',
             flexShrink: 0
-          }}>
+          }} className="order-sidebar">
             {/* Empty - no color picker */}
           </div>
 
@@ -98,7 +97,7 @@ function OrderStep4() {
             flexDirection: 'column',
             gap: 'clamp(24px, 3vw, 40px)',
             flex: '1 1 auto'
-          }} className="order-card">
+          }} className="order-form-card">
             {/* Step Label and Question */}
             <div style={{
               display: 'flex',
@@ -146,16 +145,16 @@ function OrderStep4() {
                 placeholder=""
                 style={{
                   fontFamily: 'Epilogue, sans-serif',
-                  fontSize: '1.875rem',
-                  lineHeight: '2.5rem',
+                  fontSize: 'clamp(16px, 1.5vw, 20px)',
+                  lineHeight: '1.4',
                   color: 'black',
                   border: 'none',
                   borderBottom: '3px solid #1169fe',
                   outline: 'none',
-                  padding: '0 0 0.3125rem 0',
+                  padding: '0 0 4px 0',
                   backgroundColor: 'transparent',
                   width: '100%',
-                  height: '3.125rem'
+                  height: 'clamp(44px, 5vw, 50px)'
                 }}
                 className="order-input"
               />

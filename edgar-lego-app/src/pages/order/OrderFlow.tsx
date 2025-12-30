@@ -1,5 +1,4 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { useOrderStore } from '../../store/orderStore';
 import OrderStep1 from './OrderStep1';
 import OrderStep2 from './OrderStep2';
 import OrderStep3 from './OrderStep3';
@@ -8,8 +7,6 @@ import OrderStep5 from './OrderStep5';
 import OrderConfirmation from './OrderConfirmation';
 
 function OrderFlow() {
-  const currentStep = useOrderStore((state) => state.currentStep);
-
   return (
     <div className="min-h-screen bg-white">
       <Routes>

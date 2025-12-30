@@ -3,19 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import { useOrderStore } from '../../store/orderStore';
 import logoLego from '../../assets/images/Logo.Lego.svg';
 
-const COLORS = [
-  { id: 'blue', color: '#0055BF' },
-  { id: 'purple', color: '#6B3FA0' },
-  { id: 'orange', color: '#F57E20' },
-  { id: 'red', color: '#E3000B' },
-  { id: 'gray', color: '#6C6E70' },
-];
-
 function OrderStep2() {
   const navigate = useNavigate();
   const { userData, setUserData, nextStep } = useOrderStore();
   const [address, setAddress] = useState(userData.address || '');
   const [selectedColor, setSelectedColor] = useState(userData.color || '');
+
+  const handleColorSelect = (color: string) => {
+    setSelectedColor(color);
+  };
 
   const handleNext = () => {
     if (address.trim()) {
@@ -44,7 +40,7 @@ function OrderStep2() {
         {/* Logo and Title */}
         <div style={{
           display: 'flex',
-          gap: 'clamp(8px, 1vw, 11px)',
+          gap: '40px',
           alignItems: 'center',
           flexWrap: 'wrap'
         }}>
@@ -52,15 +48,15 @@ function OrderStep2() {
             src={logoLego}
             alt="Edgar Allan LEGO Logo"
             style={{
-              width: 'clamp(80px, 10vw, 120px)',
-              height: 'clamp(80px, 10vw, 120px)',
+              width: '120px',
+              height: '120px',
               flexShrink: 0
             }}
           />
           <p style={{
             fontFamily: 'Epilogue, sans-serif',
             fontWeight: 600,
-            fontSize: 'clamp(24px, 3.5vw, 46px)',
+            fontSize: '36px',
             color: 'black',
             letterSpacing: '-0.02em',
             lineHeight: 1.1,
@@ -75,60 +71,121 @@ function OrderStep2() {
         {/* Main Content Area */}
         <div style={{
           display: 'flex',
-          gap: 'clamp(30px, 5vw, 80px)',
+          gap: '80px',
           alignItems: 'center',
           width: '100%',
           flex: 1,
           flexWrap: 'wrap'
-        }}>
+        }} className="order-main-container">
           {/* Left Side - Color Picker */}
           <div style={{
             display: 'flex',
             flexDirection: 'column',
-            gap: 'clamp(12px, 1.5vw, 16px)',
-            width: 'clamp(200px, 30vw, 400px)',
+            gap: 'clamp(16px, 2vw, 24px)',
+            width: '400px',
             height: '100%',
             justifyContent: 'center',
             padding: '0 clamp(8px, 1.5vw, 16px)',
             flexShrink: 0
-          }}>
+          }} className="order-color-picker">
             <p style={{
               fontFamily: 'Petrona, serif',
               fontWeight: 500,
               fontStyle: 'italic',
-              fontSize: 'clamp(24px, 2.5vw, 36px)',
-              color: '#2f80ed',
-              lineHeight: 1.1,
-              margin: 0,
-              width: '100%'
+              fontSize: '16px',
+              color: '#1169fe',
+              margin: 0
             }}>
-              Pick a color
+              Choose your color
             </p>
             <div style={{
               display: 'flex',
-              gap: 'clamp(16px, 2.5vw, 32px)',
+              gap: 'clamp(16px, 1.5vw, 24px)',
               alignItems: 'center',
               width: '100%',
-              flexWrap: 'wrap'
+              flexWrap: 'nowrap',
+              justifyContent: 'left'
             }}>
-              {COLORS.map((colorOption) => (
-                <div
-                  key={colorOption.id}
-                  onClick={() => setSelectedColor(colorOption.id)}
-                  style={{
-                    width: 'clamp(32px, 3vw, 40px)',
-                    height: 'clamp(32px, 3vw, 40px)',
-                    backgroundColor: colorOption.color,
-                    borderRadius: '4px',
-                    cursor: 'pointer',
-                    border: selectedColor === colorOption.id ? '3px solid black' : 'none',
-                    boxSizing: 'border-box',
-                    transition: 'transform 0.2s'
-                  }}
-                  onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.1)'}
-                  onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
-                />
-              ))}
+              <button
+                onClick={() => handleColorSelect('blue')}
+                style={{
+                  width: 'clamp(40px, 4vw, 48px)',
+                  height: 'clamp(40px, 4vw, 48px)',
+                  backgroundColor: '#0055bf',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  border: selectedColor === 'blue' ? '3px solid #000' : 'none',
+                  boxSizing: 'border-box',
+                  transition: 'transform 0.2s',
+                  flexShrink: 0
+                }}
+                onMouseEnter={(e: React.MouseEvent<HTMLButtonElement>) => (e.target as HTMLButtonElement).style.transform = 'scale(1.1)'}
+                onMouseLeave={(e: React.MouseEvent<HTMLButtonElement>) => (e.target as HTMLButtonElement).style.transform = 'scale(1)'}
+              />
+              <button
+                onClick={() => handleColorSelect('purple')}
+                style={{
+                  width: 'clamp(40px, 4vw, 48px)',
+                  height: 'clamp(40px, 4vw, 48px)',
+                  backgroundColor: '#6b3fa0',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  border: selectedColor === 'purple' ? '3px solid #000' : 'none',
+                  boxSizing: 'border-box',
+                  transition: 'transform 0.2s',
+                  flexShrink: 0
+                }}
+                onMouseEnter={(e: React.MouseEvent<HTMLButtonElement>) => (e.target as HTMLButtonElement).style.transform = 'scale(1.1)'}
+                onMouseLeave={(e: React.MouseEvent<HTMLButtonElement>) => (e.target as HTMLButtonElement).style.transform = 'scale(1)'}
+              />
+              <button
+                onClick={() => handleColorSelect('orange')}
+                style={{
+                  width: 'clamp(40px, 4vw, 48px)',
+                  height: 'clamp(40px, 4vw, 48px)',
+                  backgroundColor: '#f57e20',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  border: selectedColor === 'orange' ? '3px solid #000' : 'none',
+                  boxSizing: 'border-box',
+                  transition: 'transform 0.2s',
+                  flexShrink: 0
+                }}
+                onMouseEnter={(e: React.MouseEvent<HTMLButtonElement>) => (e.target as HTMLButtonElement).style.transform = 'scale(1.1)'}
+                onMouseLeave={(e: React.MouseEvent<HTMLButtonElement>) => (e.target as HTMLButtonElement).style.transform = 'scale(1)'}
+              />
+              <button
+                onClick={() => handleColorSelect('red')}
+                style={{
+                  width: 'clamp(40px, 4vw, 48px)',
+                  height: 'clamp(40px, 4vw, 48px)',
+                  backgroundColor: '#e3000b',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  border: selectedColor === 'red' ? '3px solid #000' : 'none',
+                  boxSizing: 'border-box',
+                  transition: 'transform 0.2s',
+                  flexShrink: 0
+                }}
+                onMouseEnter={(e: React.MouseEvent<HTMLButtonElement>) => (e.target as HTMLButtonElement).style.transform = 'scale(1.1)'}
+                onMouseLeave={(e: React.MouseEvent<HTMLButtonElement>) => (e.target as HTMLButtonElement).style.transform = 'scale(1)'}
+              />
+              <button
+                onClick={() => handleColorSelect('gray')}
+                style={{
+                  width: 'clamp(40px, 4vw, 48px)',
+                  height: 'clamp(40px, 4vw, 48px)',
+                  backgroundColor: '#6c6e70',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  border: selectedColor === 'gray' ? '3px solid #000' : 'none',
+                  boxSizing: 'border-box',
+                  transition: 'transform 0.2s',
+                  flexShrink: 0
+                }}
+                onMouseEnter={(e: React.MouseEvent<HTMLButtonElement>) => (e.target as HTMLButtonElement).style.transform = 'scale(1.1)'}
+                onMouseLeave={(e: React.MouseEvent<HTMLButtonElement>) => (e.target as HTMLButtonElement).style.transform = 'scale(1)'}
+              />
             </div>
           </div>
 
@@ -139,11 +196,11 @@ function OrderStep2() {
             padding: 'clamp(30px, 4vw, 60px)',
             width: '100%',
             maxWidth: '780px',
-            flex: '1 1 auto',
             display: 'flex',
             flexDirection: 'column',
-            gap: 'clamp(24px, 3vw, 40px)'
-          }}>
+            gap: 'clamp(24px, 3vw, 40px)',
+            flex: '1 1 auto'
+          }} className="order-form-card">
             {/* Step Label and Question */}
             <div style={{
               display: 'flex',
@@ -191,16 +248,16 @@ function OrderStep2() {
                 placeholder=""
                 style={{
                   fontFamily: 'Epilogue, sans-serif',
-                  fontSize: 'clamp(20px, 2.5vw, 30px)',
-                  lineHeight: '1.33',
+                  fontSize: 'clamp(16px, 1.5vw, 20px)',
+                  lineHeight: '1.4',
                   color: 'black',
                   border: 'none',
                   borderBottom: '3px solid #1169fe',
                   outline: 'none',
-                  padding: '0 0 5px 0',
+                  padding: '0 0 4px 0',
                   backgroundColor: 'transparent',
                   width: '100%',
-                  height: 'clamp(40px, 4vw, 50px)'
+                  height: 'clamp(44px, 5vw, 50px)'
                 }}
               />
 
@@ -244,4 +301,45 @@ function OrderStep2() {
   );
 }
 
+<style>{`
+  @media (min-width: 1200px) {
+    .order-main-container {
+      flex-direction: row !important;
+      flex-wrap: nowrap !important;
+      gap: 80px !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    .order-color-picker {
+      width: 400px !important;
+      flex-shrink: 0 !important;
+      margin: 0 !important;
+    }
+    .order-form-card {
+      flex: 1 1 auto !important;
+      max-width: 780px !important;
+      margin: 0 !important;
+    }
+  }
+  
+  @media (max-width: 1199px) {
+    .order-main-container {
+      flex-direction: column !important;
+      align-items: center !important;
+      gap: 80px !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    .order-color-picker {
+      width: 100% !important;
+      max-width: 400px !important;
+      margin: 0 !important;
+    }
+    .order-form-card {
+      width: 100% !important;
+      max-width: 780px !important;
+      margin: 0 !important;
+    }
+  }
+`}</style>
 export default OrderStep2;
