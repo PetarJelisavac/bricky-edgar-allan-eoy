@@ -22,7 +22,7 @@ function OrderStep3() {
       backgroundColor: '#fefff8',
       display: 'flex',
       flexDirection: 'column',
-      padding: 'clamp(16px, 2vw, 27px)'
+      padding: 'clamp(16px, 2vw, 16px)'
     }}>
       {/* Header Section */}
       <div style={{
@@ -67,19 +67,33 @@ function OrderStep3() {
         <div style={{
           display: 'flex',
           gap: 'clamp(30px, 5vw, 80px)',
-          alignItems: 'flex-start',
+          alignItems: 'center',
           width: '100%',
           flex: 1,
-          flexWrap: 'wrap',
-          justifyContent: 'center'
+          flexWrap: 'wrap'
         }}>
-          {/* Right Side - Form Card */}
+          {/* Left Side - Empty Spacer (same width as Step 2 color picker) */}
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 'clamp(12px, 1.5vw, 16px)',
+            width: 'clamp(200px, 30vw, 400px)',
+            height: '100%',
+            justifyContent: 'center',
+            padding: '0 clamp(8px, 1.5vw, 16px)',
+            flexShrink: 0
+          }}>
+            {/* Empty - no color picker */}
+          </div>
+
+          {/* Right Side - Form Card (identical to Step 2) */}
           <div style={{
             border: '1px solid #c6c6c6',
             borderRadius: 'clamp(20px, 2.5vw, 30px)',
             padding: 'clamp(30px, 4vw, 60px)',
             width: '100%',
             maxWidth: '780px',
+            flex: '1 1 auto',
             display: 'flex',
             flexDirection: 'column',
             gap: 'clamp(24px, 3vw, 40px)'

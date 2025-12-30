@@ -31,7 +31,7 @@ function OrderStep2() {
       backgroundColor: '#fefff8',
       display: 'flex',
       flexDirection: 'column',
-      padding: 'clamp(16px, 2vw, 27px)'
+      padding: 'clamp(16px, 2vw, 16px)'
     }}>
       {/* Header Section */}
       <div style={{
@@ -76,7 +76,7 @@ function OrderStep2() {
         <div style={{
           display: 'flex',
           gap: 'clamp(30px, 5vw, 80px)',
-          alignItems: 'flex-start',
+          alignItems: 'center',
           width: '100%',
           flex: 1,
           flexWrap: 'wrap'

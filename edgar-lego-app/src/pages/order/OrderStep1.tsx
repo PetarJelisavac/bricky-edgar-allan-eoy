@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useOrderStore } from '../../store/orderStore';
 import logoLego from '../../assets/images/Logo.Lego.svg';
 import boxImage from '../../assets/images/box-image.png';
+import image16 from '../../assets/images/image 16.png';
 
 function OrderStep1() {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ function OrderStep1() {
       backgroundColor: '#fefff8',
       display: 'flex',
       flexDirection: 'column',
-      padding: '1.6875rem'
+      padding: 'clamp(16px, 2vw, 16px)'
     }} className="order-container">
       {/* Header Section */}
       <div style={{
@@ -67,8 +68,8 @@ function OrderStep1() {
         {/* Main Content Area */}
         <div style={{
           display: 'flex',
-          gap: '5rem',
-          alignItems: 'flex-start',
+          gap: 'clamp(30px, 5vw, 80px)',
+          alignItems: 'center',
           width: '100%',
           flexWrap: 'wrap'
         }} className="order-main">
@@ -96,8 +97,8 @@ function OrderStep1() {
               }} />
               <div style={{
                 position: 'relative',
-                width: '11.625rem',
-                height: '18.0625rem',
+                width: '16.5625rem', // 265px
+                height: '11.0925rem', // 177.48px
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center'
@@ -114,7 +115,7 @@ function OrderStep1() {
               </div>
             </div>
 
-            {/* Step 2 - Inactive */}
+            {/* Step 2 - Inactive with vertical image */}
             <div style={{
               display: 'flex',
               gap: '5rem',
@@ -129,11 +130,23 @@ function OrderStep1() {
                 flexShrink: 0
               }} />
               <div style={{
-                border: '1px solid #d9d9d9',
-                width: '11.625rem',
-                height: '18.0625rem',
-                backgroundColor: '#f5f5f5'
-              }} />
+                position: 'relative',
+                width: '11.625rem', // 186px
+                height: '18.0625rem', // 289px
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                <img
+                  src={image16}
+                  alt="LEGO Box Vertical"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover'
+                  }}
+                />
+              </div>
             </div>
           </div>
 

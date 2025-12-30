@@ -26,7 +26,7 @@ function OrderStep5() {
       backgroundColor: '#fefff8',
       display: 'flex',
       flexDirection: 'column',
-      padding: 'clamp(16px, 2vw, 27px)'
+      padding: 'clamp(16px, 2vw, 16px)'
     }}>
       {/* Header Section */}
       <div style={{
@@ -70,13 +70,26 @@ function OrderStep5() {
         {/* Main Content Area */}
         <div style={{
           display: 'flex',
-          gap: 'clamp(30px, 5vw, 80px)',
-          alignItems: 'flex-start',
+          gap: 'clamp(40px, 5vw, 80px)',
+          alignItems: 'center',
           width: '100%',
           flex: 1,
-          flexWrap: 'wrap',
-          justifyContent: 'center'
+          flexWrap: 'wrap'
         }}>
+          {/* Left Side - Empty Spacer (same width as Step 2 color picker) */}
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 'clamp(12px, 1.5vw, 16px)',
+            width: 'clamp(200px, 30vw, 400px)',
+            height: '100%',
+            justifyContent: 'center',
+            padding: '0 clamp(8px, 1.5vw, 16px)',
+            flexShrink: 0
+          }}>
+            {/* Empty - no color picker */}
+          </div>
+
           {/* Right Side - Form Card */}
           <div style={{
             border: '1px solid #c6c6c6',
@@ -86,7 +99,8 @@ function OrderStep5() {
             maxWidth: '780px',
             display: 'flex',
             flexDirection: 'column',
-            gap: 'clamp(24px, 3vw, 40px)'
+            gap: 'clamp(24px, 3vw, 40px)',
+            flex: '1 1 auto'
           }}>
             {/* Step Label and Question */}
             <div style={{

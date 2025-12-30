@@ -22,7 +22,7 @@ function OrderStep4() {
       backgroundColor: '#fefff8',
       display: 'flex',
       flexDirection: 'column',
-      padding: '1.6875rem'
+      padding: 'clamp(16px, 2vw, 16px)'
     }} className="order-container">
       {/* Header Section */}
       <div style={{
@@ -67,29 +67,43 @@ function OrderStep4() {
         {/* Main Content Area */}
         <div style={{
           display: 'flex',
-          gap: '5rem',
-          alignItems: 'flex-start',
+          gap: 'clamp(40px, 5vw, 80px)',
+          alignItems: 'center',
           width: '100%',
           flex: 1,
-          flexWrap: 'wrap',
-          justifyContent: 'center'
-        }} className="order-main">
+          flexWrap: 'wrap'
+        }}>
+          {/* Left Side - Empty Spacer (same width as Step 2 color picker) */}
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 'clamp(12px, 1.5vw, 16px)',
+            width: 'clamp(200px, 30vw, 400px)',
+            height: '100%',
+            justifyContent: 'center',
+            padding: '0 clamp(8px, 1.5vw, 16px)',
+            flexShrink: 0
+          }}>
+            {/* Empty - no color picker */}
+          </div>
+
           {/* Right Side - Form Card */}
           <div style={{
             border: '1px solid #c6c6c6',
-            borderRadius: '1.875rem',
-            padding: '3.75rem',
+            borderRadius: 'clamp(20px, 2.5vw, 30px)',
+            padding: 'clamp(30px, 4vw, 60px)',
             width: '100%',
-            maxWidth: '48.75rem',
+            maxWidth: '780px',
             display: 'flex',
             flexDirection: 'column',
-            gap: '2.5rem'
+            gap: 'clamp(24px, 3vw, 40px)',
+            flex: '1 1 auto'
           }} className="order-card">
             {/* Step Label and Question */}
             <div style={{
               display: 'flex',
               flexDirection: 'column',
-              gap: '1.25rem',
+              gap: 'clamp(12px, 1.5vw, 20px)',
               width: '100%'
             }}>
               <p style={{
@@ -121,7 +135,7 @@ function OrderStep4() {
             <div style={{
               display: 'flex',
               flexDirection: 'column',
-              gap: '1.875rem',
+              gap: 'clamp(20px, 2.5vw, 30px)',
               width: '100%'
             }}>
               {/* Job Position Input */}
