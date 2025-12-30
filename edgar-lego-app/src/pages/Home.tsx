@@ -7,12 +7,12 @@ function Home() {
   const navigate = useNavigate();
 
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: 'white', display: 'flex' }} className="home-container">
+    <div style={{ minHeight: '100vh', backgroundColor: 'white', display: 'flex', padding: '16px' }} className="home-container">
       {/* Left Side - Order Path */}
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '3rem', position: 'relative' }} className="home-left">
         {/* LEGO Logo - Top Left */}
         <div style={{ position: 'absolute', top: '2rem', left: '2rem' }}>
-          <img src={logoLego} alt="Edgar Allan LEGO Logo" style={{ width: '120px', height: 'auto' }} />
+          <img src={logoLego} alt="Edgar Allan LEGO Logo" style={{ width: 'clamp(80px, 8vw + 40px, 120px)', height: 'auto' }} />
         </div>
 
         {/* Main Content */}
@@ -27,12 +27,12 @@ function Home() {
           </div>
 
           {/* Heading */}
-          <h1 style={{ fontFamily: 'Epilogue, sans-serif', fontWeight: 600, fontSize: '3rem', color: 'black', textAlign: 'center', lineHeight: 1.2 }}>
+          <h1 style={{ fontFamily: 'Epilogue, sans-serif', fontWeight: 600, fontSize: 'var(--font-size-h1)', color: 'black', textAlign: 'center', lineHeight: 1.2 }}>
             Let's build something together in 2026!
           </h1>
 
           {/* Description */}
-          <p style={{ fontFamily: 'Epilogue, sans-serif', fontSize: '1.125rem', color: '#4b5563', textAlign: 'center' }}>
+          <p style={{ fontFamily: 'Epilogue, sans-serif', fontSize: 'var(--font-size-body)', color: '#4b5563', textAlign: 'center' }}>
             Brick by brick, we're shaping the future. Get your personalized LEGO Edgar and join us in building something extraordinary.
           </p>
 
@@ -47,7 +47,7 @@ function Home() {
                 borderRadius: '9999px',
                 fontFamily: 'Petrona, serif',
                 fontStyle: 'italic',
-                fontSize: '1.25rem',
+                fontSize: 'var(--font-size-button)',
                 border: 'none',
                 cursor: 'pointer',
                 boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)'
@@ -60,13 +60,13 @@ function Home() {
       </div>
 
       {/* Right Side - Build Path */}
-      <div style={{ flex: 1, backgroundColor: '#1f71ff', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '3rem' }} className="home-right">
+      <div style={{ flex: '0 0 35%', backgroundColor: '#1f71ff', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '40px', borderRadius: '10px' }} className="home-right">
         <div style={{ maxWidth: '36rem', display: 'flex', flexDirection: 'column', gap: '2rem' }} className="home-content">
           {/* Instructions Header */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem' }}>
-            <h2 style={{ fontFamily: 'Epilogue, sans-serif', fontWeight: 600, fontSize: '2.25rem', color: 'white' }}>
-              Instructions
-            </h2>
+              <h2 style={{ fontFamily: 'Epilogue, sans-serif', fontWeight: 600, fontSize: 'var(--font-size-h2)', color: 'white' }}>
+                Instructions
+              </h2>
           </div>
 
           {/* LEGO Bricks Illustration */}
@@ -75,7 +75,7 @@ function Home() {
           </div>
 
           {/* Description */}
-          <p style={{ fontFamily: 'Epilogue, sans-serif', fontSize: '1.125rem', color: 'rgba(255, 255, 255, 0.9)', textAlign: 'center' }}>
+          <p style={{ fontFamily: 'Epilogue, sans-serif', fontSize: 'var(--font-size-body)', color: 'rgba(255, 255, 255, 0.9)', textAlign: 'center' }}>
             Already have your LEGO Edgar? Follow our step-by-step guided building experience with animations, videos, and personalized questions.
           </p>
 
@@ -90,7 +90,7 @@ function Home() {
                 borderRadius: '9999px',
                 fontFamily: 'Petrona, serif',
                 fontStyle: 'italic',
-                fontSize: '1.25rem',
+                fontSize: 'var(--font-size-button)',
                 border: 'none',
                 cursor: 'pointer',
                 boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)'
@@ -120,9 +120,6 @@ function Home() {
           .home-left, .home-right {
             padding: 2rem 1.5rem !important;
             min-height: 50vh !important;
-          }
-          .home-left img {
-            width: 6rem !important;
           }
         }
       `}</style>

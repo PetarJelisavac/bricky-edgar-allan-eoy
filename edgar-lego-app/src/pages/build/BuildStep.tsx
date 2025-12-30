@@ -55,7 +55,8 @@ function BuildStep() {
     const nextIndex = currentStepIndex + 1;
 
     if (nextIndex >= buildSteps.length) {
-      navigate('/build');
+      // All steps completed - navigate to completed screen
+      navigate('/build/completed');
     } else {
       const nextStep = buildSteps[nextIndex];
       if (nextStep.type === 'build') {
