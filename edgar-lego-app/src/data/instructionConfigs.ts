@@ -47,9 +47,9 @@ export const instructionConfigs: Record<number, InstructionConfig> = {
       {
         id: 'brick-1',
         type: '4x1',
-        left: '596px',
+        left: '341px',
         top: '-100px',
-        finalTop: '392px', // Where brick is positioned in Figma
+        finalTop: '503px', // Lands on top of placeholder
         width: '120px',
         height: '80.5px',
         animationDelay: '0s',
@@ -59,9 +59,9 @@ export const instructionConfigs: Record<number, InstructionConfig> = {
       {
         id: 'brick-2',
         type: '4x1',
-        left: '690px',
+        left: '434.5px',
         top: '-100px',
-        finalTop: '441px', // Where brick is positioned in Figma
+        finalTop: '553px', // Lands on top of placeholder
         width: '120px',
         height: '80.5px',
         animationDelay: '0.3s',
@@ -70,13 +70,13 @@ export const instructionConfigs: Record<number, InstructionConfig> = {
     ],
     placeholders: [
       {
-        left: '596px',
+        left: '341px',
         top: '503px',
         width: '118px',
         height: '78.5px',
       },
       {
-        left: '689.5px',
+        left: '434.5px',
         top: '553px',
         width: '118px',
         height: '78.5px',
@@ -92,16 +92,16 @@ export const instructionConfigs: Record<number, InstructionConfig> = {
       // Bricks from step 1 - exactly where they ended in Step 1
       {
         type: '4x1',
-        left: '596px',
-        top: '392px', // From Step 1 finalTop
+        left: '341px',
+        top: '503px', // From Step 1 finalTop
         width: '120px',
         height: '80.5px',
         zIndex: 1,
       },
       {
         type: '4x1',
-        left: '690px',
-        top: '441px', // From Step 1 finalTop
+        left: '434.5px',
+        top: '553px', // From Step 1 finalTop
         width: '120px',
         height: '80.5px',
         zIndex: 1,
@@ -112,9 +112,9 @@ export const instructionConfigs: Record<number, InstructionConfig> = {
       {
         id: 'brick-1',
         type: '4x2',
-        left: '596px',
+        left: '341px',
         top: '-100px',
-        finalTop: '281px',
+        finalTop: '480px', // Lands on top of placeholder
         width: '120px',
         height: '113px',
         animationDelay: '0s',
@@ -124,9 +124,9 @@ export const instructionConfigs: Record<number, InstructionConfig> = {
       {
         id: 'brick-2',
         type: '4x2',
-        left: '690px',
+        left: '434.5px',
         top: '-100px',
-        finalTop: '330px',
+        finalTop: '530px', // Lands on top of placeholder
         width: '120px',
         height: '113px',
         animationDelay: '0.3s',
@@ -182,7 +182,7 @@ export const instructionConfigs: Record<number, InstructionConfig> = {
       },
       {
         type: '4x2',
-        left: '436px',
+        left: '434.5px',
         top: '300px',
         width: '120px',
         height: '113px',
@@ -240,7 +240,7 @@ export const instructionConfigs: Record<number, InstructionConfig> = {
       { type: '4x1', left: '341px', top: '480px', width: '120px', height: '80.5px', zIndex: 1 },
       { type: '4x1', left: '434.5px', top: '530px', width: '120px', height: '80.5px', zIndex: 1 },
       { type: '4x2', left: '341px', top: '237px', width: '120px', height: '113px', zIndex: 3 },
-      { type: '4x2', left: '436px', top: '300px', width: '120px', height: '113px', zIndex: 2 },
+      { type: '4x2', left: '434.5px', top: '300px', width: '120px', height: '113px', zIndex: 2 },
       { type: '2x2', left: '341px', top: '390px', width: '90px', height: '97px', zIndex: 4 },
       { type: '2x2', left: '465px', top: '427px', width: '90px', height: '97px', zIndex: 3 },
     ],
@@ -276,7 +276,7 @@ export const instructionConfigs: Record<number, InstructionConfig> = {
       { type: '4x1', left: '341px', top: '480px', width: '120px', height: '80.5px', zIndex: 1 },
       { type: '4x1', left: '434.5px', top: '530px', width: '120px', height: '80.5px', zIndex: 1 },
       { type: '4x2', left: '341px', top: '237px', width: '120px', height: '113px', zIndex: 3 },
-      { type: '4x2', left: '436px', top: '300px', width: '120px', height: '113px', zIndex: 2 },
+      { type: '4x2', left: '434.5px', top: '300px', width: '120px', height: '113px', zIndex: 2 },
       { type: '2x2', left: '341px', top: '390px', width: '90px', height: '97px', zIndex: 4 },
       { type: '2x2', left: '465px', top: '427px', width: '90px', height: '97px', zIndex: 3 },
       { type: '8x2', left: '341px', top: '172px', width: '180px', height: '142px', zIndex: 5 },
@@ -370,7 +370,7 @@ export const instructionConfigs: Record<number, InstructionConfig> = {
       { type: '4x1', left: '341px', top: '480px', width: '120px', height: '80.5px', zIndex: 1 },
       { type: '4x1', left: '434.5px', top: '530px', width: '120px', height: '80.5px', zIndex: 1 },
       { type: '4x2', left: '341px', top: '237px', width: '120px', height: '113px', zIndex: 3 },
-      { type: '4x2', left: '436px', top: '300px', width: '120px', height: '113px', zIndex: 2 },
+      { type: '4x2', left: '434.5px', top: '300px', width: '120px', height: '113px', zIndex: 2 },
       { type: '2x2', left: '341px', top: '390px', width: '90px', height: '97px', zIndex: 4 },
       { type: '2x2', left: '465px', top: '427px', width: '90px', height: '97px', zIndex: 3 },
       { type: '8x2', left: '341px', top: '172px', width: '180px', height: '142px', zIndex: 5 },

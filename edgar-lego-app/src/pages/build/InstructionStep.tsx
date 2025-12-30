@@ -20,7 +20,7 @@ import Brick3x1 from '../../components/bricks/Brick3x1';
 import Brick4x1 from '../../components/bricks/Brick4x1';
 import Brick4x2 from '../../components/bricks/Brick4x2';
 import Brick6x1 from '../../components/bricks/Brick6x1';
-import { brickColorPalettes, type BrickColorName } from '../../store/buildStore';
+import { brickColorPalettes } from '../../store/buildStore';
 
 function InstructionStep() {
   const { stepId } = useParams();
@@ -98,10 +98,8 @@ function InstructionStep() {
   const generateKeyframes = () => {
     return config.bricks.map((_, index) => `
       @keyframes fallBrick${index + 1} {
-        0% { opacity: 0; transform: translateY(-300px) scale(0.8); }
-        60% { opacity: 1; }
-        80% { transform: translateY(5px) scale(1.02); }
-        100% { opacity: 1; transform: translateY(0) scale(1); }
+        0% { opacity: 0; transform: translateY(-300px); }
+        100% { opacity: 1; transform: translateY(0); }
       }
     `).join('\n');
   };
@@ -150,12 +148,12 @@ function InstructionStep() {
   };
 
   return (
-    <div className="w-full h-screen bg-[#fefff8] flex justify-center items-stretch p-6 relative">
+    <div className="w-full h-screen bg-[#fefff8] flex justify-center items-center p-6 relative">
       {/* Main content container - centered and fills available space */}
-      <div className="relative w-full max-w-[930px] flex flex-col gap-[18px]">
-        {/* Main instruction background image - grows to fill space */}
-        <div className="relative w-full flex-1 min-h-0">
-          <img src={buildingBackground} alt="Building background" className="block w-full h-full max-w-none object-cover rounded-lg" />
+      <div className="relative w-full max-w-[930px] flex flex-col gap-[18px] items-center justify-center" style={{ height: 'calc(100vh - 48px)' }}>
+        {/* Main instruction background image - maintains aspect ratio */}
+        <div className="relative w-full max-w-[930px] aspect-[930/712]">
+          <img src={buildingBackground} alt="Building background" className="absolute inset-0 w-full h-full object-cover rounded-lg" />
 
           {/* Step number badge - centered at top */}
           <div className="absolute left-1/2 -translate-x-1/2 top-[10%] w-[60px] h-[60px] border border-black flex items-center justify-center">
@@ -172,24 +170,24 @@ function InstructionStep() {
             <img src={audioIcon} alt="Audio toggle" className="block w-full h-full max-w-none" />
           </button>
 
-          {/* Placeholder outlines */}
-          {config.placeholders.map((placeholder, index) => (
-            <div
-              key={`placeholder-${index}`}
-              className="absolute animate-pulse hidden lg:block"
-              style={{
-                left: `calc(${parseFloat(placeholder.left) / 930 * 100}%)`,
-                top: `calc(${parseFloat(placeholder.top) / 712 * 100}%)`,
-                width: `calc(${parseFloat(placeholder.width) / 930 * 100}%)`,
-                height: `calc(${parseFloat(placeholder.height) / 712 * 100}%)`,
-              }}
-            >
-              <img src={instructionPlaceholder} alt="" className="block w-full h-full max-w-none" />
-            </div>
-          ))}
+          {/* LEGO Bricks and Placeholders - scaled relative to container */}
+          <div className="absolute inset-0 hidden lg:block">
+            {/* Placeholder outlines */}
+            {config.placeholders.map((placeholder, index) => (
+              <div
+                key={`placeholder-${index}`}
+                className="absolute animate-pulse"
+                style={{
+                  left: `calc(${parseFloat(placeholder.left) / 930 * 100}%)`,
+                  top: `calc(${parseFloat(placeholder.top) / 712 * 100}%)`,
+                  width: `calc(${parseFloat(placeholder.width) / 930 * 100}%)`,
+                  height: `calc(${parseFloat(placeholder.height) / 712 * 100}%)`,
+                }}
+              >
+                <img src={instructionPlaceholder} alt="" className="block w-full h-full max-w-none" />
+              </div>
+            ))}
 
-          {/* LEGO Bricks - scaled relative to container */}
-          <div className="hidden lg:block">
             {/* Static bricks from previous steps */}
             {config.staticBricks?.map((staticBrick, index) => renderStaticBrick(staticBrick, index))}
 
@@ -207,7 +205,10 @@ function InstructionStep() {
                       top: `calc(${parseFloat(brick.finalTop) / 712 * 100}%)`,
                       width: `calc(${parseFloat(brick.width) / 930 * 100}%)`,
                       height: `calc(${parseFloat(brick.height) / 712 * 100}%)`,
-                      animation: `${animationName} 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards`,
+                      animationName: animationName,
+                      animationDuration: '1.2s',
+                      animationTimingFunction: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+                      animationFillMode: 'forwards',
                       animationDelay: brick.animationDelay,
                       zIndex: brick.zIndex,
                     }}

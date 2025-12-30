@@ -230,7 +230,7 @@ function CompletedScreen() {
           width: '100vw',
           pointerEvents: 'none',
           zIndex: 9999,
-          overflow: 'hidden'
+          overflow: 'visible'
         }}
       >
         <div
@@ -267,7 +267,7 @@ function CompletedScreen() {
           position: 'fixed',
           inset: 0,
           backgroundColor: 'rgba(0, 0, 0, 0.75)',
-          zIndex: 50,
+          zIndex: 10000,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -349,7 +349,7 @@ function CompletedScreen() {
           position: 'fixed',
           inset: 0,
           backgroundColor: 'rgba(0, 0, 0, 0.75)',
-          zIndex: 50,
+          zIndex: 10000,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
