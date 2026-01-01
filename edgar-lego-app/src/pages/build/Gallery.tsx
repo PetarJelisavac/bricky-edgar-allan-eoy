@@ -1,21 +1,16 @@
 import { useNavigate } from 'react-router-dom';
 import { useBuildStore } from '../../store/buildStore';
-import logoLego from '../../assets/images/Logo.Lego.svg';
+import PageLayout from '../../components/layout/PageLayout';
 
 function Gallery() {
   const navigate = useNavigate();
   const { galleryPhotos } = useBuildStore();
 
   return (
-    <div className="min-h-screen bg-[#fefff8] flex flex-col p-4 gap-10">
-      {/* LEGO Logo and Title */}
-      <div className="flex items-center w-full gap-10">
-        <img
-          src={logoLego}
-          alt="Edgar Allan LEGO Logo"
-          className="w-[120px] h-[120px]"
-        />
-        <h1 className="font-['Epilogue'] font-semibold text-[40px] lg:text-[60px] leading-[1.1] text-black m-0">
+    <PageLayout className="flex flex-col p-4 gap-10">
+      {/* Title - Logo is now handled by PageLayout */}
+      <div className="flex items-center justify-center w-full mt-16 lg:mt-0 lg:justify-center">
+        <h1 className="font-['Epilogue'] font-semibold text-[40px] lg:text-[60px] leading-[1.1] text-black m-0 text-center">
           Lego Gallery
         </h1>
       </div>
@@ -48,7 +43,7 @@ function Gallery() {
       </div>
 
       {/* Take me home Button */}
-      <div className="flex justify-center w-full">
+      <div className="flex justify-center w-full pb-8">
         <button
           onClick={() => navigate('/build')}
           className="bg-black text-[#fefff8] flex h-[68px] items-center justify-center px-[30px] py-[13.5px] rounded-[100px] w-full max-w-[399px] border-none cursor-pointer transition-transform hover:scale-[1.02]"
@@ -58,7 +53,7 @@ function Gallery() {
           </p>
         </button>
       </div>
-    </div>
+    </PageLayout>
   );
 }
 

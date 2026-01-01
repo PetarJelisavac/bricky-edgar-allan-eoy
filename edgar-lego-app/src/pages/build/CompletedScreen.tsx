@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useBuildStore } from '../../store/buildStore';
 import edgarLego from '../../assets/images/EdgarLego.svg';
 import arrowBack from '../../assets/images/arrow-back.svg';
+import PageLayout from '../../components/layout/PageLayout';
 
 function CompletedScreen() {
   const navigate = useNavigate();
@@ -107,17 +108,7 @@ function CompletedScreen() {
   };
 
   return (
-    <div style={{
-      width: '100%',
-      height: '100vh',
-      padding: '24px',
-      position: 'relative',
-      background: '#FEFFF8',
-      overflow: 'hidden',
-      justifyContent: 'center',
-      alignItems: 'center',
-      display: 'flex'
-    }}>
+    <PageLayout showLogo={false} className="overflow-hidden" contentClassName="justify-center items-center">
       <div style={{
         width: '937px',
         maxWidth: '100%',
@@ -127,7 +118,8 @@ function CompletedScreen() {
         gap: '18px',
         display: 'flex',
         position: 'relative',
-        zIndex: 1
+        zIndex: 1,
+        padding: '24px' // Added padding that was on the outer container
       }}>
         <div style={{
           alignSelf: 'stretch',
@@ -433,7 +425,7 @@ function CompletedScreen() {
           }
         }
       `}</style>
-    </div>
+    </PageLayout>
   );
 }
 

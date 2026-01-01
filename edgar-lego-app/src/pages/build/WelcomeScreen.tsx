@@ -1,23 +1,15 @@
 import { useNavigate } from 'react-router-dom';
-import logoLego from '../../assets/images/Logo.Lego.svg';
 import edgarLego from '../../assets/images/EdgarLego.svg';
+import PageLayout from '../../components/layout/PageLayout';
 
 function WelcomeScreen() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-[#fefff8] flex flex-col relative overflow-hidden">
-      {/* Main Content - Centered */}
-      <div className="flex-1 flex flex-col items-center justify-center px-6 py-12 gap-8">
-        {/* LEGO Logo - Top */}
-        <div className="w-full flex justify-start xl:justify-start mb-4">
-          <img
-            src={logoLego}
-            alt="Edgar Allan LEGO Logo"
-            className="w-[80px] h-auto"
-          />
-        </div>
-        <div className="flex flex-col xl:flex-row gap-12 xl:gap-[92px] items-center xl:items-end max-w-[1200px] w-full">
+    <PageLayout>
+      <div className="flex-1 flex flex-col items-center justify-center px-6 py-12 gap-8 w-full h-full">
+        {/* Main Content Container */}
+        <div className="flex flex-col xl:flex-row gap-12 xl:gap-[92px] items-center xl:items-center justify-center max-w-[1200px] w-full mt-24">
           {/* Text Content */}
           <div className="flex flex-col gap-[40px] xl:gap-[70px] w-full max-w-[467px] shrink-0">
             {/* Heading */}
@@ -33,7 +25,7 @@ function WelcomeScreen() {
             </p>
           </div>
 
-          {/* LEGO Brick Illustration - Hidden on mobile, shown on desktop */}
+          {/* LEGO Brick Background - Hidden on mobile, shown on desktop */}
           <div className="relative shrink-0 hidden xl:block">
             <img
               src={edgarLego}
@@ -43,7 +35,7 @@ function WelcomeScreen() {
           </div>
         </div>
 
-        {/* LEGO Brick Illustration - Centered on mobile */}
+        {/* LEGO Brick Background - Centered on mobile */}
         <div className="relative shrink-0 xl:hidden flex items-center justify-center my-8">
           <img
             src={edgarLego}
@@ -60,7 +52,7 @@ function WelcomeScreen() {
           Lets get building!
         </button>
       </div>
-    </div>
+    </PageLayout>
   );
 }
 
