@@ -8,6 +8,7 @@ export interface OrderData {
   address: string;
   phone?: string;
   color?: string;
+  selectedProducts?: string[];
 }
 
 // Build flow types

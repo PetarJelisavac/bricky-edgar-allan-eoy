@@ -9,10 +9,22 @@ function OrderStep1() {
   const navigate = useNavigate();
   const { userData, setUserData, nextStep } = useOrderStore();
   const [name, setName] = useState(userData.name || '');
+  const [selectedProducts, setSelectedProducts] = useState<string[]>(userData.selectedProducts || ['box']);
+
+  const toggleProduct = (product: string) => {
+    setSelectedProducts(prev => {
+      if (prev.includes(product)) {
+        // Don't allow deselecting the last item
+        if (prev.length === 1) return prev;
+        return prev.filter(p => p !== product);
+      }
+      return [...prev, product];
+    });
+  };
 
   const handleNext = () => {
     if (name.trim()) {
-      setUserData({ name: name.trim() });
+      setUserData({ name: name.trim(), selectedProducts });
       nextStep();
       navigate('/order/step-2');
     }
@@ -87,19 +99,27 @@ function OrderStep1() {
             flexShrink: 0
           }} className="order-sidebar">
             {/* Step 1 - Active with Box Image */}
-            <div style={{
-              display: 'flex',
-              gap: 'clamp(20px, 3vw, 40px)',
-              alignItems: 'center',
-              padding: 'clamp(8px, 1vw, 16px)',
-              flex: '1 1 auto'
-            }}>
+            <div
+              onClick={() => toggleProduct('box')}
+              style={{
+                display: 'flex',
+                gap: 'clamp(20px, 3vw, 40px)',
+                alignItems: 'center',
+                padding: 'clamp(8px, 1vw, 16px)',
+                flex: '1 1 auto',
+                cursor: 'pointer',
+                opacity: selectedProducts.includes('box') ? 1 : 0.6,
+                transition: 'opacity 0.2s',
+              }}
+            >
               <div style={{
-                backgroundColor: '#d9d9d9',
+                backgroundColor: selectedProducts.includes('box') ? '#1169fe' : '#d9d9d9',
+                border: selectedProducts.includes('box') ? '4px solid #e6e6e6' : 'none',
                 borderRadius: '100px',
                 width: 'clamp(16px, 2vw, 24px)',
                 height: 'clamp(16px, 2vw, 24px)',
-                flexShrink: 0
+                flexShrink: 0,
+                transition: 'all 0.2s'
               }} />
               <div style={{
                 position: 'relative',
@@ -125,19 +145,27 @@ function OrderStep1() {
             </div>
 
             {/* Step 2 - Inactive with vertical image */}
-            <div style={{
-              display: 'flex',
-              gap: 'clamp(20px, 3vw, 40px)',
-              alignItems: 'center',
-              padding: 'clamp(8px, 1vw, 16px)',
-              flex: '1 1 auto'
-            }}>
+            <div
+              onClick={() => toggleProduct('poster')}
+              style={{
+                display: 'flex',
+                gap: 'clamp(20px, 3vw, 40px)',
+                alignItems: 'center',
+                padding: 'clamp(8px, 1vw, 16px)',
+                flex: '1 1 auto',
+                cursor: 'pointer',
+                opacity: selectedProducts.includes('poster') ? 1 : 0.6,
+                transition: 'opacity 0.2s',
+              }}
+            >
               <div style={{
-                backgroundColor: '#d9d9d9',
+                backgroundColor: selectedProducts.includes('poster') ? '#1169fe' : '#d9d9d9',
+                border: selectedProducts.includes('poster') ? '4px solid #e6e6e6' : 'none',
                 borderRadius: '100px',
                 width: 'clamp(16px, 2vw, 24px)',
                 height: 'clamp(16px, 2vw, 24px)',
-                flexShrink: 0
+                flexShrink: 0,
+                transition: 'all 0.2s'
               }} />
               <div style={{
                 position: 'relative',
