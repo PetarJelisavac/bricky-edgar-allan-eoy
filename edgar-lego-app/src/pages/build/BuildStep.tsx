@@ -59,7 +59,7 @@ function BuildStep() {
 
   return (
     <PageLayout showLogo={false}>
-      <div className="flex flex-col w-full items-center" style={{ minHeight: '100svh', backgroundColor: '#fefff8' }}>
+      <div className="flex flex-col w-full items-center h-full" style={{ backgroundColor: '#fefff8' }}>
         {/* Title */}
         <div className="flex items-center justify-center p-5 lg:pt-[48px] shrink-0 w-full">
           <h1 className="font-['Epilogue'] font-semibold text-[24px] lg:text-[40px] text-black text-center m-0">

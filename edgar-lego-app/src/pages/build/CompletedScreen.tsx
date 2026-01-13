@@ -1,109 +1,10 @@
-import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useBuildStore } from '../../store/buildStore';
-import edgarLego from '../../assets/images/EdgarLego.svg';
-import arrowBack from '../../assets/images/arrow-back.svg';
 import PageLayout from '../../components/layout/PageLayout';
 
 function CompletedScreen() {
   const navigate = useNavigate();
-  const { addPhoto } = useBuildStore();
-  const [showCamera, setShowCamera] = useState(false);
-  const [capturedImage, setCapturedImage] = useState<string | null>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const streamRef = useRef<MediaStream | null>(null);
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    if (showCamera && videoRef.current) {
-      navigator.mediaDevices
-        .getUserMedia({ video: { facingMode: 'environment' } })
-        .then((stream) => {
-          streamRef.current = stream;
-          if (videoRef.current) {
-            videoRef.current.srcObject = stream;
-          }
-        })
-        .catch((err) => {
-          console.error('Error accessing camera:', err);
-          alert('Unable to access camera. Please check permissions.');
-        });
-    }
-
-    return () => {
-      if (streamRef.current) {
-        streamRef.current.getTracks().forEach((track) => track.stop());
-      }
-    };
-  }, [showCamera]);
-
-  const handleTakePicture = () => {
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    if (isMobile) {
-      fileInputRef.current?.click();
-    } else {
-      setShowCamera(true);
-    }
-  };
-
-  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        setCapturedImage(event.target?.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const capturePhoto = () => {
-    if (videoRef.current && canvasRef.current) {
-      const video = videoRef.current;
-      const canvas = canvasRef.current;
-      const ctx = canvas.getContext('2d');
-
-      if (ctx) {
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
-        ctx.drawImage(video, 0, 0);
-
-        const imageDataUrl = canvas.toDataURL('image/jpeg');
-        setCapturedImage(imageDataUrl);
-        setShowCamera(false);
-
-        if (streamRef.current) {
-          streamRef.current.getTracks().forEach((track) => track.stop());
-        }
-      }
-    }
-  };
-
-  const savePhoto = () => {
-    if (capturedImage) {
-      const photo = {
-        id: Date.now().toString(),
-        imageUrl: capturedImage,
-        timestamp: Date.now(),
-      };
-      addPhoto(photo);
-      setCapturedImage(null);
-      navigate('/gallery');
-    }
-  };
-
-  const retakePhoto = () => {
-    setCapturedImage(null);
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    if (!isMobile) {
-      setShowCamera(true);
-    } else {
-      fileInputRef.current?.click();
-    }
-  };
-
-  const handleBack = () => {
+  const handleStartAgain = () => {
     navigate('/');
   };
 
@@ -123,94 +24,66 @@ function CompletedScreen() {
       }}>
         <div style={{
           alignSelf: 'stretch',
-          height: '624px',
-          position: 'relative',
-          background: '#CCE5FF',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center'
+          textAlign: 'center',
+          color: 'black',
+          fontSize: 'clamp(24px, 3vw, 36px)',
+          fontFamily: 'Epilogue, sans-serif',
+          fontWeight: 600,
+          lineHeight: 1.3,
+          wordWrap: 'break-word',
+          marginBottom: '12px'
         }}>
-          <img
-            src={edgarLego}
-            alt="Edgar LEGO Character"
-            style={{
-              height: '100%',
-              width: 'auto',
-              objectFit: 'contain'
-            }}
-          />
+          We did it!
         </div>
 
         <div style={{
           alignSelf: 'stretch',
+          textAlign: 'center',
+          color: 'black',
+          fontSize: 'clamp(16px, 2vw, 18px)',
+          fontFamily: 'Epilogue, sans-serif',
+          fontWeight: 400,
+          lineHeight: 1.5,
+          wordWrap: 'break-word',
+          marginBottom: '24px'
+        }}>
+          Great job! You've completed your build.
+        </div>
+
+        <div style={{
           display: 'flex',
+          gap: '12px',
           alignItems: 'center',
-          justifyContent: 'space-between',
-          gap: '16px'
+          justifyContent: 'center',
+          width: '100%',
+          flexWrap: 'wrap'
         }}>
           <button
-            onClick={handleBack}
+            onClick={handleStartAgain}
             style={{
-              border: '1px solid #939393',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'flex-start',
-              padding: '34px 41px',
-              borderRadius: '80px',
-              backgroundColor: 'transparent',
-              cursor: 'pointer',
-              transition: 'transform 0.2s',
-            }}
-            onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-            onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
-          >
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              transform: 'rotate(180deg)',
-              width: '27px',
-              height: '15px'
-            }}>
-              <img src={arrowBack} alt="Back" style={{ width: '100%', height: '100%' }} />
-            </div>
-          </button>
-
-          <button
-            onClick={handleTakePicture}
-            style={{
-              backgroundColor: '#000000',
-              display: 'flex',
-              height: '68px',
-              alignItems: 'center',
-              justifyContent: 'center',
-              padding: '13.5px 30px',
-              borderRadius: '100px',
-              flex: 1,
-              maxWidth: '399px',
-              cursor: 'pointer',
-              transition: 'transform 0.2s',
-              fontFamily: 'Petrona, sans-serif',
-              fontStyle: 'italic',
+              backgroundColor: 'black',
+              color: '#fefff8',
+              padding: 'clamp(10px, 1.5vw, 13.5px) clamp(20px, 2.5vw, 30px)',
+              height: 'clamp(44px, 5vw, 68px)',
+              borderRadius: '9999px',
+              fontFamily: 'Petrona, serif',
               fontWeight: 500,
-              fontSize: '24px',
-              color: '#FEFFF8',
-              border: 'none'
+              fontStyle: 'italic',
+              fontSize: 'clamp(16px, 2vw, 24px)',
+              lineHeight: 'normal',
+              border: 'none',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              transition: 'transform 0.2s',
+              minWidth: 'clamp(150px, 20vw, 200px)'
             }}
             onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.02)'}
             onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
           >
-            Take a picture!
+            Start Again
           </button>
-
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept="image/*"
-            capture="environment"
-            onChange={handleFileSelect}
-            style={{ display: 'none' }}
-          />
         </div>
       </div>
 
@@ -253,163 +126,6 @@ function CompletedScreen() {
           ))}
         </div>
       </div>
-
-      {showCamera && (
-        <div style={{
-          position: 'fixed',
-          inset: 0,
-          backgroundColor: 'rgba(0, 0, 0, 0.75)',
-          zIndex: 10000,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '24px'
-        }}>
-          <div style={{
-            width: '100%',
-            maxWidth: '672px',
-            backgroundColor: 'black',
-            borderRadius: '8px',
-            padding: '16px'
-          }}>
-            <div style={{
-              position: 'relative',
-              backgroundColor: '#1f2937',
-              borderRadius: '8px',
-              overflow: 'hidden',
-              aspectRatio: '16/9'
-            }}>
-              <video
-                ref={videoRef}
-                autoPlay
-                playsInline
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover'
-                }}
-              />
-              <canvas ref={canvasRef} style={{ display: 'none' }} />
-            </div>
-            <div style={{
-              display: 'flex',
-              gap: '16px',
-              marginTop: '16px',
-              justifyContent: 'center'
-            }}>
-              <button
-                onClick={() => {
-                  setShowCamera(false);
-                  if (streamRef.current) {
-                    streamRef.current.getTracks().forEach((track) => track.stop());
-                  }
-                }}
-                style={{
-                  padding: '12px 24px',
-                  backgroundColor: '#4b5563',
-                  color: 'white',
-                  borderRadius: '100px',
-                  fontFamily: 'Epilogue, sans-serif',
-                  border: 'none',
-                  cursor: 'pointer'
-                }}
-              >
-                Cancel
-              </button>
-              <button
-                onClick={capturePhoto}
-                style={{
-                  padding: '12px 24px',
-                  backgroundColor: 'white',
-                  color: 'black',
-                  borderRadius: '100px',
-                  fontFamily: 'Epilogue, sans-serif',
-                  fontWeight: 600,
-                  border: 'none',
-                  cursor: 'pointer'
-                }}
-              >
-                Capture
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {capturedImage && !showCamera && (
-        <div style={{
-          position: 'fixed',
-          inset: 0,
-          backgroundColor: 'rgba(0, 0, 0, 0.75)',
-          zIndex: 10000,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '24px'
-        }}>
-          <div style={{
-            width: '100%',
-            maxWidth: '672px',
-            backgroundColor: 'black',
-            borderRadius: '8px',
-            padding: '16px'
-          }}>
-            <div style={{
-              position: 'relative',
-              backgroundColor: '#1f2937',
-              borderRadius: '8px',
-              overflow: 'hidden',
-              aspectRatio: '16/9'
-            }}>
-              <img
-                src={capturedImage}
-                alt="Captured photo"
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover'
-                }}
-              />
-            </div>
-            <div style={{
-              display: 'flex',
-              gap: '16px',
-              marginTop: '16px',
-              justifyContent: 'center'
-            }}>
-              <button
-                onClick={retakePhoto}
-                style={{
-                  padding: '12px 24px',
-                  backgroundColor: '#4b5563',
-                  color: 'white',
-                  borderRadius: '100px',
-                  fontFamily: 'Epilogue, sans-serif',
-                  border: 'none',
-                  cursor: 'pointer'
-                }}
-              >
-                Retake
-              </button>
-              <button
-                onClick={savePhoto}
-                style={{
-                  padding: '12px 24px',
-                  backgroundColor: 'white',
-                  color: 'black',
-                  borderRadius: '100px',
-                  fontFamily: 'Epilogue, sans-serif',
-                  fontWeight: 600,
-                  border: 'none',
-                  cursor: 'pointer'
-                }}
-              >
-                Save to Gallery
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
 
       <style>{`
         .marquee-track {
