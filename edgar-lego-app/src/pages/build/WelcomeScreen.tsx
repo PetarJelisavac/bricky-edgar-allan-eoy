@@ -32,7 +32,7 @@ function WelcomeScreen() {
               <h1 
                 className="font-['Epilogue'] font-semibold text-black m-0 w-full"
                 style={{ 
-                  fontSize: 'clamp(40px, 5vw, 60px)',
+                  fontSize: 'clamp(32px, 5vw, 60px)',
                   lineHeight: '1.2'
                 }}
               >
@@ -52,15 +52,13 @@ function WelcomeScreen() {
             </button>
           </div>
 
-          {/* Svg-container - LEGO Brick with fixed dimensions */}
-          <div className="relative shrink-0 w-full lg:w-[350px] h-[282px]">
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-              <img
-                src={edgarLego}
-                alt="Edgar LEGO Character"
-                className="block w-auto h-auto"
-              />
-            </div>
+          {/* Svg-container - LEGO Brick with reduced size (25% smaller) */}
+          <div className="relative shrink-0 flex items-center justify-center">
+            <img
+              src={edgarLego}
+              alt="Edgar LEGO Character"
+              className="block w-auto h-[211.5px]"
+            />
           </div>
         </div>
 
