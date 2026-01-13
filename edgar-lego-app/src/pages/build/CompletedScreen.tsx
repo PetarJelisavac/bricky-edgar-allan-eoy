@@ -5,7 +5,7 @@ function CompletedScreen() {
   const navigate = useNavigate();
 
   const handleStartAgain = () => {
-    navigate('/');
+    navigate('/build');
   };
 
   return (

@@ -1,19 +1,12 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import WelcomeScreen from './pages/build/WelcomeScreen';
-import BuildStep from './pages/build/BuildStep';
-import InstructionStep from './pages/build/InstructionStep';
-import CompletedScreen from './pages/build/CompletedScreen';
-import Gallery from './pages/build/Gallery';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import BuildFlow from './pages/build/BuildFlow';
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<WelcomeScreen />} />
-        <Route path="/step/:stepId" element={<BuildStep />} />
-        <Route path="/instruction/:stepId" element={<InstructionStep />} />
-        <Route path="/completed" element={<CompletedScreen />} />
-        <Route path="/gallery" element={<Gallery />} />
+        <Route path="/" element={<Navigate to="/build" replace />} />
+        <Route path="/build/*" element={<BuildFlow />} />
       </Routes>
     </Router>
   );

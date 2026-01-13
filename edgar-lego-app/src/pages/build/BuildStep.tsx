@@ -48,11 +48,11 @@ function BuildStep() {
 
     if (nextIndex >= buildSteps.length) {
       // All steps completed - navigate to completed screen
-      navigate('/completed');
+      navigate('/build/completed');
     } else {
       const nextStep = buildSteps[nextIndex];
       if (nextStep.type === 'build') {
-        navigate(`/instruction/${nextIndex}`);
+        navigate(`/build/instruction/${nextIndex}`);
       }
     }
   };
