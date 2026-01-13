@@ -56,7 +56,7 @@ function CompletedScreen() {
         style={{
           position: 'fixed',
           left: 0,
-          top: '55vh',
+          top: 'calc(55vh - 80px)',
           width: '100vw',
           pointerEvents: 'none',
           zIndex: 9999,
