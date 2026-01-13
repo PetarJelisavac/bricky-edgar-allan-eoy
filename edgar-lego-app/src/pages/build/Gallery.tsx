@@ -7,7 +7,7 @@ function Gallery() {
   const { galleryPhotos } = useBuildStore();
 
   return (
-    <PageLayout className="flex flex-col p-4 gap-10">
+    <PageLayout className="flex flex-col p-4 pb-[max(20px,calc(env(safe-area-inset-bottom)+8px))] gap-10">
       {/* Title - Logo is now handled by PageLayout */}
       <div className="flex items-center justify-center w-full mt-16 lg:mt-0 lg:justify-center">
         <h1 className="font-['Epilogue'] font-semibold text-[40px] lg:text-[60px] leading-[1.1] text-black m-0 text-center">

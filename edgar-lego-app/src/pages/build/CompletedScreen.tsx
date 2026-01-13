@@ -9,7 +9,7 @@ function CompletedScreen() {
   };
 
   return (
-    <PageLayout showLogo={false} className="overflow-hidden" contentClassName="justify-center items-center">
+    <PageLayout showLogo={false} className="overflow-hidden pb-[max(20px,calc(env(safe-area-inset-bottom)+8px))]" contentClassName="justify-center items-center">
       <div style={{
         width: '937px',
         maxWidth: '100%',

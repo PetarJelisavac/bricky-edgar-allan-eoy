@@ -7,11 +7,11 @@ function WelcomeScreen() {
 
   return (
     <div 
-      className="bg-[#fefff8] flex items-center justify-center px-5 py-5 lg:px-16 relative w-full"
-      style={{ minHeight: '100svh' }}
+      className="bg-[#fefff8] flex items-center justify-center px-5 py-5 pb-[max(20px,calc(env(safe-area-inset-bottom)+8px))] lg:px-16 relative w-full"
+      style={{ height: '100dvh' }}
     >
       {/* container-main - max 1440px */}
-      <div className="w-full max-w-[1440px] flex flex-col justify-between items-center lg:items-stretch relative" style={{ minHeight: '100svh' }}>
+      <div className="w-full max-w-[1440px] flex flex-col justify-between items-center lg:items-stretch relative h-full">
         
         {/* Logo-wrapper - sticks to top */}
         <div className="flex items-center w-full shrink-0">
