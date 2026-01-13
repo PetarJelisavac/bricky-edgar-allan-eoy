@@ -78,14 +78,14 @@ function InstructionStep() {
     const nextIndex = currentStepIndex + 1;
     if (nextIndex >= buildSteps.length) {
       // All steps completed - navigate to completed screen
-      navigate('/build/completed');
+      navigate('/completed');
     } else {
       const nextStep = buildSteps[nextIndex];
       if (nextStep.type === 'build') {
         if (nextIndex === 1) {
-          navigate(`/build/step/${nextIndex}`);
+          navigate(`/step/${nextIndex}`);
         } else {
-          navigate(`/build/instruction/${nextIndex}`);
+          navigate(`/instruction/${nextIndex}`);
         }
       }
     }
@@ -94,14 +94,14 @@ function InstructionStep() {
   const handleBack = () => {
     const prevIndex = currentStepIndex - 1;
     if (prevIndex < 0) {
-      navigate('/build');
+      navigate('/');
     } else {
       const prevStep = buildSteps[prevIndex];
       if (prevStep.type === 'build') {
         if (prevIndex === 1) {
-          navigate(`/build/step/${prevIndex}`);
+          navigate(`/step/${prevIndex}`);
         } else {
-          navigate(`/build/instruction/${prevIndex}`);
+          navigate(`/instruction/${prevIndex}`);
         }
       }
     }

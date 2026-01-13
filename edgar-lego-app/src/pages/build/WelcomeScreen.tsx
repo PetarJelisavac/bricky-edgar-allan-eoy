@@ -45,7 +45,7 @@ function WelcomeScreen() {
 
             {/* Button */}
             <button
-              onClick={() => navigate('/build/step/1')}
+              onClick={() => navigate('/step/1')}
               className="bg-black text-[#fefff8] px-[30px] py-[13.5px] h-[68px] w-full max-w-[350px] rounded-[100px] font-['Petrona'] font-medium italic text-[24px] leading-normal border-none cursor-pointer flex items-center justify-center transition-transform hover:scale-[1.02] shrink-0"
             >
               Lets get building!

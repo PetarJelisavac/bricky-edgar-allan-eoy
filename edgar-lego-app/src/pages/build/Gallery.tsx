@@ -45,7 +45,7 @@ function Gallery() {
       {/* Take me home Button */}
       <div className="flex justify-center w-full pb-8">
         <button
-          onClick={() => navigate('/build')}
+          onClick={() => navigate('/')}
           className="bg-black text-[#fefff8] flex h-[68px] items-center justify-center px-[30px] py-[13.5px] rounded-[100px] w-full max-w-[399px] border-none cursor-pointer transition-transform hover:scale-[1.02]"
         >
           <p className="font-['Petrona'] font-medium italic text-[24px] text-nowrap">

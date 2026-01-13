@@ -1,12 +1,11 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import BuildFlow from './pages/build/BuildFlow';
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Navigate to="/build" replace />} />
-        <Route path="/build/*" element={<BuildFlow />} />
+        <Route path="/*" element={<BuildFlow />} />
       </Routes>
     </Router>
   );
