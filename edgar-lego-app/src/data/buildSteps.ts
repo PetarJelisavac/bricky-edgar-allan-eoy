@@ -118,7 +118,7 @@ export const buildSteps: BuildStep[] = [
     id: 14,
     type: 'build',
     content: {
-      instruction: 'Add the 6x1 bricks and curved top pieces',
+      instruction: 'Add the side pips to the back',
       bricks: [],
     },
   },
@@ -126,7 +126,23 @@ export const buildSteps: BuildStep[] = [
     id: 15,
     type: 'build',
     content: {
+      instruction: 'Add the 6x1 bricks and curved top pieces',
+      bricks: [],
+    },
+  },
+  {
+    id: 16,
+    type: 'build',
+    content: {
       instruction: 'Add the 2x1 brick and top piece to complete the build',
+      bricks: [],
+    },
+  },
+  {
+    id: 17,
+    type: 'build',
+    content: {
+      instruction: 'View the completed back side',
       bricks: [],
     },
   },

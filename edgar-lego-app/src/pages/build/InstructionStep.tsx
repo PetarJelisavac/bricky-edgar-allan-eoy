@@ -25,6 +25,13 @@ import BrickTop from '../../components/bricks/BrickTop';
 import BrickTopLeftCurve from '../../components/bricks/BrickTopLeftCurve';
 import BrickTopCurveRight from '../../components/bricks/BrickTopCurveRight';
 import Brick1x2SidePip from '../../components/bricks/Brick1x2SidePip';
+import Brick1x1SidePip from '../../components/bricks/Brick1x1SidePip';
+import Brick1x2SidePipNew from '../../components/bricks/Brick1x2SidePipNew';
+import Brick1x1SidePipWhite from '../../components/bricks/Brick1x1SidePipWhite';
+import BackSide from '../../components/bricks/BackSide';
+import BackSideRightColumn from '../../components/bricks/BackSideRightColumn';
+import RightSideColumn from '../../components/bricks/RightSideColumn';
+import BackCompleted from '../../components/bricks/BackCompleted';
 import Brick3x1White from '../../components/bricks/Brick3x1White';
 import Brick3x1Flat from '../../components/bricks/Brick3x1Flat';
 import Brick8x2 from '../../components/bricks/Brick8x2';
@@ -120,8 +127,8 @@ function InstructionStep() {
 
   const generateKeyframes = () => {
     // Starting Y position for drop animation (above final position)
-    // /instruction/14 and /instruction/15 (stepNumber 13 and 14) need lower starting position
-    const startY = (config.stepNumber === 13 || config.stepNumber === 14) ? -220 : -300;
+    // /instruction/14, /instruction/15, /instruction/16 (stepNumber 13, 14, 15) need lower starting position
+    const startY = (config.stepNumber === 13 || config.stepNumber === 14 || config.stepNumber === 15) ? -220 : -300;
 
     return config.bricks.map((brick, index) => {
       // Check if this brick has a gap-closing animation (finalLeft property)
@@ -198,6 +205,20 @@ function InstructionStep() {
         return <Brick8x2 colorPalette={colorPalette} />;
       case '1x2-side-pip':
         return <Brick1x2SidePip colorPalette={colorPalette} />;
+      case '1x1-side-pip':
+        return <Brick1x1SidePip colorPalette={colorPalette} />;
+      case '1x2-side-pip-new':
+        return <Brick1x2SidePipNew />;
+      case '1x1-side-pip-white':
+        return <Brick1x1SidePipWhite />;
+      case 'back-side':
+        return <BackSide colorPalette={colorPalette} />;
+      case 'back-side-right-column':
+        return <BackSideRightColumn colorPalette={colorPalette} />;
+      case 'right-side-column':
+        return <RightSideColumn colorPalette={colorPalette} />;
+      case 'back-completed':
+        return <BackCompleted colorPalette={colorPalette} />;
       case 'vertical-white':
         return <BrickVertical colorPalette={{ name: 'Baddy Blue', primary: '#FFFFFF', secondary: '#D9D9D9', tertiary: '#E5E5E5', highlight: '#FFFFFF' }} />;
       case 'vertical-blue':

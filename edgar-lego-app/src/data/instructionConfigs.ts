@@ -2,7 +2,7 @@
 
 export interface BrickConfig {
   id: string;
-  type: '1x2' | '2x1' | '2x2' | '3x1' | '4x1' | '4x2' | '6x1' | '8x2' | 'single' | '3x1-white' | '3x1-flat' | '1x2-side-pip' | 'vertical-white' | 'vertical-blue' | 'top-curve-right' | 'top-left-curve' | 'top';
+  type: '1x2' | '2x1' | '2x2' | '3x1' | '4x1' | '4x2' | '6x1' | '8x2' | 'single' | '3x1-white' | '3x1-flat' | '1x2-side-pip' | '1x1-side-pip' | '1x2-side-pip-new' | '1x1-side-pip-white' | 'vertical-white' | 'vertical-blue' | 'top-curve-right' | 'top-left-curve' | 'top' | 'back-side' | 'back-side-right-column' | 'right-side-column' | 'back-completed';
   left: string;
   top: string;
   finalTop: string; // Where brick lands after animation
@@ -23,7 +23,7 @@ export interface PlaceholderConfig {
 }
 
 export interface StaticBrickConfig {
-  type: '1x2' | '2x1' | '2x2' | '3x1' | '4x1' | '4x2' | '6x1' | '8x2' | 'single' | '3x1-white' | '3x1-flat' | '1x2-side-pip' | 'vertical-white' | 'vertical-blue' | 'top-curve-right' | 'top-left-curve' | 'top';
+  type: '1x2' | '2x1' | '2x2' | '3x1' | '4x1' | '4x2' | '6x1' | '8x2' | 'single' | '3x1-white' | '3x1-flat' | '1x2-side-pip' | '1x1-side-pip' | '1x2-side-pip-new' | '1x1-side-pip-white' | 'vertical-white' | 'vertical-blue' | 'top-curve-right' | 'top-left-curve' | 'top' | 'back-side' | 'back-side-right-column' | 'right-side-column' | 'back-completed';
   left: string;
   top: string;
   width: string;
@@ -882,10 +882,52 @@ export const instructionConfigs: Record<number, InstructionConfig> = {
     ],
     placeholders: [],
   },
-  // Step 13 (index 14) - Two 6x1 bricks and four curved top pieces (2x TopCurveRight + 2x TopLeftCurve)
-  // Based on Figma design: https://www.figma.com/design/lLpX6OSZHOGKcHxsuOnJQ3/EOY_LegoAssets?node-id=194-20187
+  // Step 13 (index 14) - BackSide with two pips dropping (1x2-new left, 1x2 right)
+  // Based on Figma design: https://www.figma.com/design/lLpX6OSZHOGKcHxsuOnJQ3/EOY_LegoAssets?node-id=247-23854
   14: {
     stepNumber: 13,
+    staticBricks: [
+      // BackSide replaces all individual bricks for this step only
+      // Aligned with individual bricks: leftmost at 340px, topmost at 247px
+      { type: 'back-side', left: '340px', top: '247px', width: '211px', height: '358px', zIndex: 1 },
+      // Right side column overlay - z-index 5 to overlap the 1x1 pip (z-index 2)
+      { type: 'right-side-column', left: '461px', top: '324px', width: '90px', height: '149px', zIndex: 5 },
+    ],
+    bricks: [
+      // 1x2 Side Pip New - drops on left side, lands on yellow stud
+      // z-index 3 to stay in front of BackSide (z-index 2)
+      {
+        id: 'brick-1',
+        type: '1x2-side-pip-new',
+        left: '366px',
+        finalLeft: '366px',
+        top: '-100px',
+        finalTop: '320px',
+        width: '65px',
+        height: '106px',
+        animationDelay: '0s',
+        zIndex: 3,
+      },
+      // 1x1 Side Pip White - drops below and right (z-index 0 so BackSide overlaps it)
+      {
+        id: 'brick-2',
+        type: '1x1-side-pip-white',
+        left: '431px',
+        finalLeft: '431px',
+        top: '-100px',
+        finalTop: '390px',
+        width: '65px',
+        height: '70px',
+        animationDelay: '0.3s',
+        zIndex: 2,
+      },
+    ],
+    placeholders: [],
+  },
+  // Step 14 (index 15) - Two 6x1 bricks and four curved top pieces (2x TopCurveRight + 2x TopLeftCurve)
+  // Based on Figma design: https://www.figma.com/design/lLpX6OSZHOGKcHxsuOnJQ3/EOY_LegoAssets?node-id=194-20187
+  15: {
+    stepNumber: 14,
     staticBricks: [
       // All bricks from steps 1-13
       { type: '4x1', left: '340px', top: '478px', width: '120px', height: '78.454px', zIndex: 2 },
@@ -1000,10 +1042,10 @@ export const instructionConfigs: Record<number, InstructionConfig> = {
     ],
     placeholders: [],
   },
-  // Step 14 (index 15) - 2x1 brick and large top piece to complete the build
+  // Step 15 (index 16) - 2x1 brick and large top piece to complete the build
   // Based on Figma design: https://www.figma.com/design/lLpX6OSZHOGKcHxsuOnJQ3/EOY_LegoAssets?node-id=194-20699
-  15: {
-    stepNumber: 14,
+  16: {
+    stepNumber: 15,
     staticBricks: [
       // All bricks from steps 1-14
       { type: '4x1', left: '340px', top: '478px', width: '120px', height: '78.454px', zIndex: 2 },
@@ -1074,6 +1116,18 @@ export const instructionConfigs: Record<number, InstructionConfig> = {
         zIndex: 44,
       },
     ],
+    placeholders: [],
+  },
+  // Step 16 (index 17) - BackCompleted replaces all individual bricks
+  // Same position as BackSide from step 14
+  17: {
+    stepNumber: 16,
+    staticBricks: [
+      // BackCompleted - single SVG replacing all individual bricks
+      // Position matches BackSide: left 340px, top 247px
+      { type: 'back-completed', left: '340px', top: '219px', width: '212px', height: '386px', zIndex: 1 },
+    ],
+    bricks: [],
     placeholders: [],
   },
 };
