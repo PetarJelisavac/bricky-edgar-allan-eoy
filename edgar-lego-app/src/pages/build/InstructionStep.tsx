@@ -43,6 +43,9 @@ import Circle from '../../components/bricks/Circle';
 import Brick3x1White from '../../components/bricks/Brick3x1White';
 import Brick3x1Flat from '../../components/bricks/Brick3x1Flat';
 import Brick8x2 from '../../components/bricks/Brick8x2';
+import BackSideLastScene from '../../components/bricks/BackSideLastScene';
+import DoorsLeftSide from '../../components/bricks/DoorsLeftSide';
+import DoorsRightSide from '../../components/bricks/DoorsRightSide';
 import InstructionPlaceholder from '../../components/bricks/InstructionPlaceholder';
 import { brickColorPalettes } from '../../store/buildStore';
 
@@ -64,7 +67,7 @@ function InstructionStep() {
   const currentStepIndex = parseInt(stepId || '0');
   const step = buildSteps[currentStepIndex];
   const config = instructionConfigs[currentStepIndex] || instructionConfigs[2];
-  
+
   // Get background color based on selected brick color
   const backgroundColor = selectedBrickColor ? colorBackgrounds[selectedBrickColor] : '#CCE5FF';
 
@@ -166,7 +169,7 @@ function InstructionStep() {
         const startLeft = parseFloat(brick.left);
         const finalLeft = brick.finalLeft ? parseFloat(brick.finalLeft) : startLeft;
         const horizontalShift = finalLeft - startLeft;
-        
+
         return `
           @keyframes fallBrick${index + 1} {
             0% { opacity: 0; transform: translate(-50%, -50%) scale(0) translateX(0); }
@@ -180,18 +183,22 @@ function InstructionStep() {
       }).join('\n');
     }
 
-    // Special animations for step 18 (stepNumber 17) - white back bricks scale in
-    if (config.stepNumber === 17) {
-      return config.bricks.map((_, index) => {
+    // Special animations for step 18 and 19 (stepNumber 17, 19) - white back bricks and doors scale in
+    if (config.stepNumber === 17 || config.stepNumber === 19) {
+      return config.bricks.map((brick, index) => {
+        const startLeft = parseFloat(brick.left);
+        const finalLeft = brick.finalLeft ? parseFloat(brick.finalLeft) : startLeft;
+        const horizontalShift = finalLeft - startLeft;
+
         return `
           @keyframes fallBrick${index + 1} {
-            0% { opacity: 0; transform: translate(-50%, -50%) scale(0); }
-            10% { opacity: 1; transform: translate(-50%, -50%) scale(0.78); }
-            20% { opacity: 1; transform: translate(-50%, -50%) scale(1.15); }
-            40% { opacity: 1; transform: translate(-50%, -50%) scale(0.96); }
-            60% { opacity: 1; transform: translate(-50%, -50%) scale(1.02); }
-            80% { opacity: 1; transform: translate(-50%, -50%) scale(0.99); }
-            100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0) translateX(0); }
+            10% { opacity: 1; transform: translate(-50%, -50%) scale(0.78) translateX(0); }
+            20% { opacity: 1; transform: translate(-50%, -50%) scale(1.15) translateX(0); }
+            40% { opacity: 1; transform: translate(-50%, -50%) scale(0.96) translateX(0); }
+            60% { opacity: 1; transform: translate(-50%, -50%) scale(1.02) translateX(0); }
+            80% { opacity: 1; transform: translate(-50%, -50%) scale(0.99) translateX(0); }
+            100% { opacity: 1; transform: translate(-50%, -50%) scale(1) translateX(${horizontalShift}px); }
           }
         `;
       }).join('\n');
@@ -306,6 +313,12 @@ function InstructionStep() {
         return <BrickVertical colorPalette={{ name: 'Baddy Blue', primary: '#FFFFFF', secondary: '#D9D9D9', tertiary: '#E5E5E5', highlight: '#FFFFFF' }} />;
       case 'vertical-blue':
         return <BrickVertical colorPalette={colorPalette} />;
+      case 'back-side-last-scene':
+        return <BackSideLastScene colorPalette={colorPalette} />;
+      case 'doors-left-side':
+        return <DoorsLeftSide colorPalette={colorPalette} />;
+      case 'doors-right-side':
+        return <DoorsRightSide colorPalette={colorPalette} />;
       case 'single':
         return <img src={singleBrickAsset} alt="LEGO brick" className="block w-full h-full max-w-none" />;
       default:

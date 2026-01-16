@@ -154,4 +154,12 @@ export const buildSteps: BuildStep[] = [
       bricks: [],
     },
   },
+  {
+    id: 19,
+    type: 'build',
+    content: {
+      instruction: 'Complete the building with doors',
+      bricks: [],
+    },
+  },
 ];

@@ -2,7 +2,7 @@
 
 export interface BrickConfig {
   id: string;
-  type: '1x2' | '2x1' | '2x2' | '3x1' | '4x1' | '4x2' | '6x1' | '8x2' | 'single' | '3x1-white' | '3x1-flat' | '1x2-side-pip' | '1x1-side-pip' | '1x2-side-pip-new' | '1x1-side-pip-white' | 'vertical-white' | 'vertical-blue' | 'top-curve-right' | 'top-left-curve' | 'top' | 'back-side' | 'back-side-right-column' | 'right-side-column' | 'back-completed' | 'back-side-step1' | 'back-side-step1-front' | 'circle' | '4x1-back-white' | '1x2-back-white' | '1x1-back-white';
+  type: '1x2' | '2x1' | '2x2' | '3x1' | '4x1' | '4x2' | '6x1' | '8x2' | 'single' | '3x1-white' | '3x1-flat' | '1x2-side-pip' | '1x1-side-pip' | '1x2-side-pip-new' | '1x1-side-pip-white' | 'vertical-white' | 'vertical-blue' | 'top-curve-right' | 'top-left-curve' | 'top' | 'back-side' | 'back-side-right-column' | 'right-side-column' | 'back-completed' | 'back-side-step1' | 'back-side-step1-front' | 'circle' | '4x1-back-white' | '1x2-back-white' | '1x1-back-white' | 'doors-left-side' | 'doors-right-side';
   left: string;
   top: string;
   finalTop: string; // Where brick lands after animation
@@ -23,7 +23,7 @@ export interface PlaceholderConfig {
 }
 
 export interface StaticBrickConfig {
-  type: '1x2' | '2x1' | '2x2' | '3x1' | '4x1' | '4x2' | '6x1' | '8x2' | 'single' | '3x1-white' | '3x1-flat' | '1x2-side-pip' | '1x1-side-pip' | '1x2-side-pip-new' | '1x1-side-pip-white' | 'vertical-white' | 'vertical-blue' | 'top-curve-right' | 'top-left-curve' | 'top' | 'back-side' | 'back-side-right-column' | 'right-side-column' | 'back-completed' | 'back-side-step1' | 'back-side-step1-front' | 'circle' | '4x1-back-white' | '1x2-back-white' | '1x1-back-white' | 'left-side-z0' | 'left-side-z2';
+  type: '1x2' | '2x1' | '2x2' | '3x1' | '4x1' | '4x2' | '6x1' | '8x2' | 'single' | '3x1-white' | '3x1-flat' | '1x2-side-pip' | '1x1-side-pip' | '1x2-side-pip-new' | '1x1-side-pip-white' | 'vertical-white' | 'vertical-blue' | 'top-curve-right' | 'top-left-curve' | 'top' | 'back-side' | 'back-side-right-column' | 'right-side-column' | 'back-completed' | 'back-side-step1' | 'back-side-step1-front' | 'circle' | '4x1-back-white' | '1x2-back-white' | '1x1-back-white' | 'left-side-z0' | 'left-side-z2' | 'back-side-last-scene';
   left: string;
   top: string;
   width: string;
@@ -1178,6 +1178,40 @@ export const instructionConfigs: Record<number, InstructionConfig> = {
         width: '64px',
         height: '115px',
         animationDelay: '0.4s',
+        zIndex: 1,
+      },
+    ],
+    placeholders: [],
+  },
+  // Step 19 (index 19) - Final scene with Doors
+  19: {
+    stepNumber: 19,
+    staticBricks: [
+      { type: 'back-side-last-scene', left: '340px', top: '219px', width: '212px', height: '386px', zIndex: 0 },
+    ],
+    bricks: [
+      {
+        id: 'door-left',
+        type: 'doors-left-side',
+        left: '195px',
+        top: '382px',
+        finalLeft: '348px',
+        finalTop: '290px',
+        width: '70px',
+        height: '174px',
+        animationDelay: '0s',
+        zIndex: 1,
+      },
+      {
+        id: 'door-right',
+        type: 'doors-right-side',
+        left: '291px',
+        top: '392px',
+        finalLeft: '400px',
+        finalTop: '315px',
+        width: '70px',
+        height: '174px',
+        animationDelay: '0s',
         zIndex: 1,
       },
     ],
