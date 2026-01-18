@@ -100,7 +100,7 @@ function CompletedScreen() {
 
       <style>{`
         .marquee-track {
-          animation: marquee-scroll 30s linear infinite;
+          animation: marquee-scroll 20s linear infinite;
         }
 
         @keyframes marquee-scroll {

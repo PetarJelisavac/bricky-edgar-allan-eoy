@@ -216,7 +216,7 @@ function InstructionStep() {
         return `
           @keyframes fallBrick${index + 1} {
             /* Scale in with bounce (0-40%) */
-            0% { opacity: 1; transform: translate(-50%, -50%) translate(0, ${startY}px) scale(0); }
+            0% { opacity: 0; transform: translate(-50%, -50%) translate(0, ${startY}px) scale(0); }
             5% { opacity: 1; transform: translate(-50%, -50%) translate(0, ${startY}px) scale(0.78); }
             10% { opacity: 1; transform: translate(-50%, -50%) translate(0, ${startY}px) scale(1.2); }
             20% { opacity: 1; transform: translate(-50%, -50%) translate(0, ${startY}px) scale(0.96); }
@@ -235,7 +235,7 @@ function InstructionStep() {
         return `
           @keyframes fallBrick${index + 1} {
             /* Scale in with bounce (0-40%) - from JSON layer 0 */
-            0% { opacity: 1; transform: translate(-50%, -50%) translateY(${startY}px) scale(0); }
+            0% { opacity: 0; transform: translate(-50%, -50%) translateY(${startY}px) scale(0); }
             5% { opacity: 1; transform: translate(-50%, -50%) translateY(${startY}px) scale(0.78); }
             10% { opacity: 1; transform: translate(-50%, -50%) translateY(${startY}px) scale(1.2); }
             20% { opacity: 1; transform: translate(-50%, -50%) translateY(${startY}px) scale(0.96); }
