@@ -337,7 +337,7 @@ function InstructionStep() {
 
   // Center-based positioning: convert top-left coordinates to center offsets
   // Original design: 930x712, center at (465, 356)
-  const CENTER_X = 425;
+  const CENTER_X = 445;
   const CENTER_Y = 356;
 
   const renderStaticBrick = (brickConfig: typeof config.staticBricks[0], index: number) => {
