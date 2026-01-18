@@ -212,7 +212,7 @@ function InstructionStep() {
         const finalLeft = parseFloat(brick.finalLeft);
         const horizontalShift = finalLeft - startLeft;
 
-        // Gap-closing animation: scale in with bounce, then drop and slide
+        // Gap-closing animation: scale in with bounce, then drop and slide with easing
         return `
           @keyframes fallBrick${index + 1} {
             /* Scale in with bounce (0-40%) */
@@ -222,12 +222,16 @@ function InstructionStep() {
             20% { opacity: 1; transform: translate(-50%, -50%) translate(0, ${startY}px) scale(0.96); }
             30% { opacity: 1; transform: translate(-50%, -50%) translate(0, ${startY}px) scale(1.01); }
             40% { opacity: 1; transform: translate(-50%, -50%) translate(0, ${startY}px) scale(1); }
-            /* Drop down and slide (40-100%) */
+            /* Drop down with bezier curve (0.83, 0.05, 0.64, 1) - fast start, smooth slow finish */
+            45% { opacity: 1; transform: translate(-50%, -50%) translate(${horizontalShift * 0.45}px, ${startY * 0.55}px) scale(1); }
+            52% { opacity: 1; transform: translate(-50%, -50%) translate(${horizontalShift * 0.75}px, ${startY * 0.25}px) scale(1); }
+            62% { opacity: 1; transform: translate(-50%, -50%) translate(${horizontalShift * 0.92}px, ${startY * 0.08}px) scale(1); }
+            75% { opacity: 1; transform: translate(-50%, -50%) translate(${horizontalShift * 0.98}px, ${startY * 0.02}px) scale(1); }
             100% { opacity: 1; transform: translate(-50%, -50%) translate(${horizontalShift}px, 0) scale(1); }
           }
         `;
       } else {
-        // Regular animation from JSON: scale in with bounce, then drop down
+        // Regular animation from JSON: scale in with bounce, then drop down with easing
         return `
           @keyframes fallBrick${index + 1} {
             /* Scale in with bounce (0-40%) - from JSON layer 0 */
@@ -237,7 +241,11 @@ function InstructionStep() {
             20% { opacity: 1; transform: translate(-50%, -50%) translateY(${startY}px) scale(0.96); }
             30% { opacity: 1; transform: translate(-50%, -50%) translateY(${startY}px) scale(1.01); }
             40% { opacity: 1; transform: translate(-50%, -50%) translateY(${startY}px) scale(1); }
-            /* Drop down (40-100%) - no overshoot */
+            /* Drop down with bezier curve (0.83, 0.05, 0.64, 1) - fast start, smooth slow finish */
+            45% { opacity: 1; transform: translate(-50%, -50%) translateY(${startY * 0.55}px) scale(1); }
+            52% { opacity: 1; transform: translate(-50%, -50%) translateY(${startY * 0.25}px) scale(1); }
+            62% { opacity: 1; transform: translate(-50%, -50%) translateY(${startY * 0.08}px) scale(1); }
+            75% { opacity: 1; transform: translate(-50%, -50%) translateY(${startY * 0.02}px) scale(1); }
             100% { opacity: 1; transform: translate(-50%, -50%) translateY(0) scale(1); }
           }
         `;
@@ -329,7 +337,7 @@ function InstructionStep() {
 
   // Center-based positioning: convert top-left coordinates to center offsets
   // Original design: 930x712, center at (465, 356)
-  const CENTER_X = 465;
+  const CENTER_X = 425;
   const CENTER_Y = 356;
 
   const renderStaticBrick = (brickConfig: typeof config.staticBricks[0], index: number) => {
@@ -432,7 +440,7 @@ function InstructionStep() {
                   animationName: animationName,
                   animationDuration: '1.6s',
                   animationTimingFunction: 'linear', // Keyframes handle the easing
-                  animationFillMode: 'forwards',
+                  animationFillMode: 'both', // 'both' applies 0% styles before animation starts (prevents flash)
                   animationDelay: '0ms', // All bricks animate simultaneously
                   zIndex: brick.zIndex,
                 };
