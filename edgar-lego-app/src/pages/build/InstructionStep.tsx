@@ -149,13 +149,13 @@ function InstructionStep() {
         if (brick.type === 'circle') {
           return `
             @keyframes fallBrick${index + 1} {
-              0% { opacity: 0; transform: translate(-50%, -50%) scale(0); }
-              10% { opacity: 1; transform: translate(-50%, -50%) scale(0.78); }
-              20% { opacity: 1; transform: translate(-50%, -50%) scale(1.15); }
-              40% { opacity: 1; transform: translate(-50%, -50%) scale(0.96); }
-              60% { opacity: 1; transform: translate(-50%, -50%) scale(1.02); }
-              80% { opacity: 1; transform: translate(-50%, -50%) scale(0.99); }
-              100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+              0% { visibility: visible; transform: translate(-50%, -50%) scale(0); }
+              10% { visibility: visible; transform: translate(-50%, -50%) scale(0.78); }
+              20% { visibility: visible; transform: translate(-50%, -50%) scale(1.15); }
+              40% { visibility: visible; transform: translate(-50%, -50%) scale(0.96); }
+              60% { visibility: visible; transform: translate(-50%, -50%) scale(1.02); }
+              80% { visibility: visible; transform: translate(-50%, -50%) scale(0.99); }
+              100% { visibility: visible; transform: translate(-50%, -50%) scale(1); }
             }
           `;
         }
@@ -173,12 +173,12 @@ function InstructionStep() {
 
         return `
           @keyframes fallBrick${index + 1} {
-            0% { opacity: 0; transform: translate(-50%, -50%) scale(0) translateX(0); }
-            10% { opacity: 1; transform: translate(-50%, -50%) scale(0.78) translateX(0); }
-            20% { opacity: 1; transform: translate(-50%, -50%) scale(1.15) translateX(0); }
-            35% { opacity: 1; transform: translate(-50%, -50%) scale(1) translateX(0); }
-            50% { opacity: 1; transform: translate(-50%, -50%) scale(1) translateX(0); }
-            100% { opacity: 1; transform: translate(-50%, -50%) scale(1) translateX(${horizontalShift}px); }
+            0% { visibility: visible; transform: translate(-50%, -50%) scale(0) translateX(0); }
+            10% { visibility: visible; transform: translate(-50%, -50%) scale(0.78) translateX(0); }
+            20% { visibility: visible; transform: translate(-50%, -50%) scale(1.15) translateX(0); }
+            35% { visibility: visible; transform: translate(-50%, -50%) scale(1) translateX(0); }
+            50% { visibility: visible; transform: translate(-50%, -50%) scale(1) translateX(0); }
+            100% { visibility: visible; transform: translate(-50%, -50%) scale(1) translateX(${horizontalShift}px); }
           }
         `;
       }).join('\n');
@@ -193,13 +193,13 @@ function InstructionStep() {
 
         return `
           @keyframes fallBrick${index + 1} {
-            0% { opacity: 0; transform: translate(-50%, -50%) scale(0) translateX(0); }
-            10% { opacity: 1; transform: translate(-50%, -50%) scale(0.78) translateX(0); }
-            20% { opacity: 1; transform: translate(-50%, -50%) scale(1.15) translateX(0); }
-            40% { opacity: 1; transform: translate(-50%, -50%) scale(0.96) translateX(0); }
-            60% { opacity: 1; transform: translate(-50%, -50%) scale(1.02) translateX(0); }
-            80% { opacity: 1; transform: translate(-50%, -50%) scale(0.99) translateX(0); }
-            100% { opacity: 1; transform: translate(-50%, -50%) scale(1) translateX(${horizontalShift}px); }
+            0% { visibility: visible; transform: translate(-50%, -50%) scale(0) translateX(0); }
+            10% { visibility: visible; transform: translate(-50%, -50%) scale(0.78) translateX(0); }
+            20% { visibility: visible; transform: translate(-50%, -50%) scale(1.15) translateX(0); }
+            40% { visibility: visible; transform: translate(-50%, -50%) scale(0.96) translateX(0); }
+            60% { visibility: visible; transform: translate(-50%, -50%) scale(1.02) translateX(0); }
+            80% { visibility: visible; transform: translate(-50%, -50%) scale(0.99) translateX(0); }
+            100% { visibility: visible; transform: translate(-50%, -50%) scale(1) translateX(${horizontalShift}px); }
           }
         `;
       }).join('\n');
