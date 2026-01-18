@@ -216,18 +216,18 @@ function InstructionStep() {
         return `
           @keyframes fallBrick${index + 1} {
             /* Scale in with bounce (0-40%) */
-            0% { opacity: 0; transform: translate(-50%, -50%) translate(0, ${startY}px) scale(0); }
-            5% { opacity: 1; transform: translate(-50%, -50%) translate(0, ${startY}px) scale(0.78); }
-            10% { opacity: 1; transform: translate(-50%, -50%) translate(0, ${startY}px) scale(1.2); }
-            20% { opacity: 1; transform: translate(-50%, -50%) translate(0, ${startY}px) scale(0.96); }
-            30% { opacity: 1; transform: translate(-50%, -50%) translate(0, ${startY}px) scale(1.01); }
-            40% { opacity: 1; transform: translate(-50%, -50%) translate(0, ${startY}px) scale(1); }
+            0% { visibility: visible; transform: translate(-50%, -50%) translate(0, ${startY}px) scale(0); }
+            5% { visibility: visible; transform: translate(-50%, -50%) translate(0, ${startY}px) scale(0.78); }
+            10% { visibility: visible; transform: translate(-50%, -50%) translate(0, ${startY}px) scale(1.2); }
+            20% { visibility: visible; transform: translate(-50%, -50%) translate(0, ${startY}px) scale(0.96); }
+            30% { visibility: visible; transform: translate(-50%, -50%) translate(0, ${startY}px) scale(1.01); }
+            40% { visibility: visible; transform: translate(-50%, -50%) translate(0, ${startY}px) scale(1); }
             /* Drop down with bezier curve (0.83, 0.05, 0.64, 1) - fast start, smooth slow finish */
-            45% { opacity: 1; transform: translate(-50%, -50%) translate(${horizontalShift * 0.45}px, ${startY * 0.55}px) scale(1); }
-            52% { opacity: 1; transform: translate(-50%, -50%) translate(${horizontalShift * 0.75}px, ${startY * 0.25}px) scale(1); }
-            62% { opacity: 1; transform: translate(-50%, -50%) translate(${horizontalShift * 0.92}px, ${startY * 0.08}px) scale(1); }
-            75% { opacity: 1; transform: translate(-50%, -50%) translate(${horizontalShift * 0.98}px, ${startY * 0.02}px) scale(1); }
-            100% { opacity: 1; transform: translate(-50%, -50%) translate(${horizontalShift}px, 0) scale(1); }
+            45% { visibility: visible; transform: translate(-50%, -50%) translate(${horizontalShift * 0.45}px, ${startY * 0.55}px) scale(1); }
+            52% { visibility: visible; transform: translate(-50%, -50%) translate(${horizontalShift * 0.75}px, ${startY * 0.25}px) scale(1); }
+            62% { visibility: visible; transform: translate(-50%, -50%) translate(${horizontalShift * 0.92}px, ${startY * 0.08}px) scale(1); }
+            75% { visibility: visible; transform: translate(-50%, -50%) translate(${horizontalShift * 0.98}px, ${startY * 0.02}px) scale(1); }
+            100% { visibility: visible; transform: translate(-50%, -50%) translate(${horizontalShift}px, 0) scale(1); }
           }
         `;
       } else {
@@ -235,18 +235,18 @@ function InstructionStep() {
         return `
           @keyframes fallBrick${index + 1} {
             /* Scale in with bounce (0-40%) - from JSON layer 0 */
-            0% { opacity: 0; transform: translate(-50%, -50%) translateY(${startY}px) scale(0); }
-            5% { opacity: 1; transform: translate(-50%, -50%) translateY(${startY}px) scale(0.78); }
-            10% { opacity: 1; transform: translate(-50%, -50%) translateY(${startY}px) scale(1.2); }
-            20% { opacity: 1; transform: translate(-50%, -50%) translateY(${startY}px) scale(0.96); }
-            30% { opacity: 1; transform: translate(-50%, -50%) translateY(${startY}px) scale(1.01); }
-            40% { opacity: 1; transform: translate(-50%, -50%) translateY(${startY}px) scale(1); }
+            0% { visibility: visible; transform: translate(-50%, -50%) translateY(${startY}px) scale(0); }
+            5% { visibility: visible; transform: translate(-50%, -50%) translateY(${startY}px) scale(0.78); }
+            10% { visibility: visible; transform: translate(-50%, -50%) translateY(${startY}px) scale(1.2); }
+            20% { visibility: visible; transform: translate(-50%, -50%) translateY(${startY}px) scale(0.96); }
+            30% { visibility: visible; transform: translate(-50%, -50%) translateY(${startY}px) scale(1.01); }
+            40% { visibility: visible; transform: translate(-50%, -50%) translateY(${startY}px) scale(1); }
             /* Drop down with bezier curve (0.83, 0.05, 0.64, 1) - fast start, smooth slow finish */
-            45% { opacity: 1; transform: translate(-50%, -50%) translateY(${startY * 0.55}px) scale(1); }
-            52% { opacity: 1; transform: translate(-50%, -50%) translateY(${startY * 0.25}px) scale(1); }
-            62% { opacity: 1; transform: translate(-50%, -50%) translateY(${startY * 0.08}px) scale(1); }
-            75% { opacity: 1; transform: translate(-50%, -50%) translateY(${startY * 0.02}px) scale(1); }
-            100% { opacity: 1; transform: translate(-50%, -50%) translateY(0) scale(1); }
+            45% { visibility: visible; transform: translate(-50%, -50%) translateY(${startY * 0.55}px) scale(1); }
+            52% { visibility: visible; transform: translate(-50%, -50%) translateY(${startY * 0.25}px) scale(1); }
+            62% { visibility: visible; transform: translate(-50%, -50%) translateY(${startY * 0.08}px) scale(1); }
+            75% { visibility: visible; transform: translate(-50%, -50%) translateY(${startY * 0.02}px) scale(1); }
+            100% { visibility: visible; transform: translate(-50%, -50%) translateY(0) scale(1); }
           }
         `;
       }
@@ -431,16 +431,21 @@ function InstructionStep() {
                 const offsetX = brickCenterX - CENTER_X;
                 const offsetY = brickCenterY - CENTER_Y;
 
+                // Calculate startY to position element at animation start (prevents flash)
+                const startY = (config.stepNumber >= 4 && config.stepNumber <= 15) ? -100 : -300;
+
                 const brickStyle: React.CSSProperties = {
                   left: `calc(50% + ${offsetX}px)`,
                   top: `calc(50% + ${offsetY}px)`,
                   width: brick.width,
                   height: brick.height,
-                  transform: 'translate(-50%, -50%)',
+                  // Initial transform matches animation 0% - element starts at top position, invisible
+                  transform: `translate(-50%, -50%) translateY(${startY}px) scale(0)`,
+                  visibility: 'hidden', // Use visibility instead of opacity - completely prevents paint
                   animationName: animationName,
                   animationDuration: '1.6s',
                   animationTimingFunction: 'linear', // Keyframes handle the easing
-                  animationFillMode: 'both', // 'both' applies 0% styles before animation starts (prevents flash)
+                  animationFillMode: 'both', // 'both' applies 0% styles before animation starts
                   animationDelay: '0ms', // All bricks animate simultaneously
                   zIndex: brick.zIndex,
                 };
@@ -454,7 +459,7 @@ function InstructionStep() {
                 return (
                   <div
                     key={brick.id}
-                    className="absolute opacity-0"
+                    className="absolute"
                     style={brickStyle}
                   >
                     {renderBrickComponent(brick.type)}
